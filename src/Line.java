@@ -20,31 +20,47 @@ public class Line {
      * @param x2 the x value of the ending Point
      * @param y2 the y value of the ending Point
      */
-    public Line(double x1, double y1, double x2, double y2) { }
+    public Line(double x1, double y1, double x2, double y2) {
+        this.start = new Point(x1, y1);
+        this.end = new Point(x2, y2);
+    }
     /**
      * Calculates the length of the Line.
      * @return the length of the Line
      */
-    public double length() { }
+    public double length() {
+        return this.start.distance(this.end);
+    }
     /**
      * Calculates the middle of the Line.
      * @return the middle Point of the Line.
      */
-    public Point middle() { }
+    public Point middle() {
+        return new Point(
+            (this.start.getX() + this.end.getX()) / 2,
+            (this.start.getY() + this.end.getY()) / 2
+        );
+    }
     /**
      * @return the start Point of the Line
      */
-    public Point start() { }
+    public Point start() {
+        return new Point(this.start);
+    }
     /**
      * @return the end Point of the Line
      */
-    public Point end() { }
+    public Point end() {
+        return new Point(this.end);
+    }
     /**
      * Determines whether the Line intersects with the other Line.
      * @param other the other Line
      * @return true if the Lines intersect and false otherwise
      */
-    public boolean isIntersecting(Line other) { }
+    public boolean isIntersecting(Line other) {
+
+    }
     /**
      * Determines whether the Line intersects with the other Lines.
      * @param other1 another Line
