@@ -14,6 +14,14 @@ public class Point {
         this.y = y;
     }
     /**
+     * Copy constructor of the Point class.
+     * @param other the Point to be copied
+     */
+    public Point(Point other) {
+        this.x = other.getX();
+        this.y = other.getY();
+    }
+    /**
      * Measure distance between the Point and another Point.
      * @param other the Point to measure distance from
      * @return the distance between the Point objects
