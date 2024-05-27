@@ -87,12 +87,14 @@ public class Line {
             return b == 0;
         }
         double intersectionXValue = b / a;
+
+        double greaterLineXValue = Math.max(this.start.getX(), this.end.getX());
+        double lowerLineXValue = Math.min(this.start.getX(), this.end.getX());
+
         return (
-            intersectionXValue >= this.start.getX()
-            && intersectionXValue <= this.end.getX()
-            && intersectionXValue >= other.start.getX()
-            && intersectionXValue <= other.end.getX()
-        )
+            ThresholdCompare.isThresholdBasedGreaterEqual(greaterLineXValue, intersectionXValue)
+            && ThresholdCompare.isThresholdBasedGreaterEqual(intersectionXValue, lowerLineXValue)
+        );
     }
     /**
      * Determines whether the Line intersects with the other Lines.
@@ -100,17 +102,23 @@ public class Line {
      * @param other2 yet another Line
      * @return true if the two Lines intersect with the Line and false otherwise
      */
-    public boolean isIntersecting(Line other1, Line other2) { }
+    public boolean isIntersecting(Line other1, Line other2) {
+        return false;
+    }
     /**
      * Calculates the intersection Point of the Line with the other Line.
      * @param other the other Line
      * @return the intersection Point if the Lines intersect and null otherwise
      */
-    public Point intersectionWith(Line other) { }
+    public Point intersectionWith(Line other) {
+        return new Point(0, 0);
+    }
     /**
      * Determines whether the Line is equal to the other Line.
      * @param other the other Line
      * @return true if the Lines are equal and false otherwise
      */
-    public boolean equals(Line other) { }
+    public boolean equals(Line other) {
+        return false;
+    }
 }
