@@ -12,6 +12,7 @@ public class Line {
     public Line(Point start, Point end) {
         this.start = new Point(start);
         this.end = new Point(end);
+
     }
     /**
      * Constructor of the Line class.
@@ -63,6 +64,20 @@ public class Line {
         );
     }
     /**
+     * @return the b of the line (y = mx + b)
+     */
+    double getB() {
+        return this.start.getY() - this.getSlope() * this.start.getX();
+    }
+    /**
+     * Gets the Line's y value at said x value.
+     * @param x the x value for which we would like to find the y value
+     * @return the y value at said position
+     */
+    double getYAtX(double x) {
+        return this.getSlope() * x + this.getB();
+    }
+    /**
      * Determines whether the Line intersects with the other Line.
      * @param other the other Line
      * @return true if the Lines intersect and false otherwise
@@ -71,8 +86,6 @@ public class Line {
         double firstSlope = this.getSlope();
         double secondSlope = other.getSlope();
 
-        double firstB = this.start.getY() - firstSlope * this.start.getX();
-        double secondB = other.start.getY() - firstSlope * other.start.getX();
         // Given system of equations that are of the form
         // y = slope*x + b
         // Derive equation of the form
@@ -80,7 +93,7 @@ public class Line {
         // and solve for x
 
         double a = firstSlope - secondSlope;
-        double b = -(firstB - secondB);
+        double b = -(this.getB() - other.getB());
 
         if (a == 0) {
             // the lines are parallel, checking whether they collide
@@ -103,7 +116,10 @@ public class Line {
      * @return true if the two Lines intersect with the Line and false otherwise
      */
     public boolean isIntersecting(Line other1, Line other2) {
-        return false;
+        return (
+            this.isIntersecting(other1)
+            || this.isIntersecting(other2)
+        );
     }
     /**
      * Calculates the intersection Point of the Line with the other Line.
@@ -111,7 +127,29 @@ public class Line {
      * @return the intersection Point if the Lines intersect and null otherwise
      */
     public Point intersectionWith(Line other) {
-        return new Point(0, 0);
+        if (!this.isIntersecting(other)) {
+            return null;
+        }
+        double firstSlope = this.getSlope();
+        double secondSlope = other.getSlope();
+
+        // Given system of equations that are of the form
+        // y = slope*x + b
+        // Derive equation of the form
+        // ax = b
+        // and solve for x
+
+        double a = firstSlope - secondSlope;
+        double b = -(this.getB() - other.getB());
+
+        if (a == 0) {
+            // we know that the lines intersect and that they are parallel
+            // from the above we infer that the lines collide and return null accoringly
+            return null;
+        }
+        double intersectionXValue = b / a;
+        // we know that the lines intersect and so there is no need to validate the intersectionXValue
+        return new Point(intersectionXValue, this.getYAtX(intersectionXValue));
     }
     /**
      * Determines whether the Line is equal to the other Line.
