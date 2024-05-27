@@ -54,12 +54,45 @@ public class Line {
         return new Point(this.end);
     }
     /**
+     * @return the slope of the Line
+     */
+    double getSlope() {
+        return (
+            (this.end.getY() - this.start.getY())
+            / (this.end.getX() - this.start.getX())
+        );
+    }
+    /**
      * Determines whether the Line intersects with the other Line.
      * @param other the other Line
      * @return true if the Lines intersect and false otherwise
      */
     public boolean isIntersecting(Line other) {
+        double firstSlope = this.getSlope();
+        double secondSlope = other.getSlope();
 
+        double firstB = this.start.getY() - firstSlope * this.start.getX();
+        double secondB = other.start.getY() - firstSlope * other.start.getX();
+        // Given system of equations that are of the form
+        // y = slope*x + b
+        // Derive equation of the form
+        // ax = b
+        // and solve for x
+
+        double a = firstSlope - secondSlope;
+        double b = -(firstB - secondB);
+
+        if (a == 0) {
+            // the lines are parallel, checking whether they collide
+            return b == 0;
+        }
+        double intersectionXValue = b / a;
+        return (
+            intersectionXValue >= this.start.getX()
+            && intersectionXValue <= this.end.getX()
+            && intersectionXValue >= other.start.getX()
+            && intersectionXValue <= other.end.getX()
+        )
     }
     /**
      * Determines whether the Line intersects with the other Lines.

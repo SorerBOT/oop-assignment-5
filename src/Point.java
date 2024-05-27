@@ -38,10 +38,9 @@ public class Point {
      * @return true if the Point is equal to the other Point and false otherwise
      */
     public boolean equals(Point other) {
-        double epsilon = 0.000001d;
         return (
-            (Math.abs(this.x - other.getX()) < epsilon)
-            && (Math.abs(this.y - other.getY()) < epsilon)
+            ThresholdCompare.isThresholdBasedEquals(this.x, other.getX())
+            && ThresholdCompare.isThresholdBasedEquals(this.y, other.getY())
         );
     }
     /**
