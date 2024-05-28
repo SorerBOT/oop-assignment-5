@@ -88,7 +88,7 @@ public class Line {
      * @return true if the Point's x value is within the range of x value for which the Line is defined
      * and false otherwise
      */
-    public boolean onSegment(Point point) {
+    public boolean isPointOnLineSegment(Point point) {
         return (
             ThresholdCompare.isThresholdBasedGreaterEqual(point.getX(), Math.min(this.start.getX(), this.end.getX()))
             && ThresholdCompare.isThresholdBasedGreaterEqual(Math.max(this.start.getX(), this.end.getX()), point.getX())
@@ -96,11 +96,38 @@ public class Line {
     }
     /**
      * Determines whether the Line intersects with the other Line.
+     * The result is procured through the following set of deductions:
+        * If the orientations o1 and o2 are different, and o3 also differs from o4 the lines form an X shape
+            meaning that the infinite Lines from which the Line segments are cut intersect.
+            From this we derive that if the Points designated with one Line are on the Line Segment of the other
+            the lines intersect
+        * If the orientation is equal to 0,
+            it means that the third point is on the same infinite line as our Line segment
+            meaning that if the Point is between our two points, the lines intersect (we must ensure that is the case)
      * @param other the other Line
      * @return true if the Lines intersect and false otherwise
      */
     public boolean isIntersecting(Line other) {
-        
+        int o1 = this.getOrientationOfPoint(other.start());
+        int o2 = this.getOrientationOfPoint(other.end());
+        int o3 = other.getOrientationOfPoint(this.start);
+        int o4 = other.getOrientationOfPoint(this.end);
+
+        if (o1 != o2 && o3 != o4) {
+            // It then follows that the infinite lines intersect
+            // we must ensure that the Line Segments intersect
+            return (
+                this.isPointOnLineSegment(other.start())
+                || this.isPointOnLineSegment(other.end())
+            );
+        }
+
+        return (
+            (o1 == 0 && this.isPointOnLineSegment(other.start()))
+            || (o2 == 0 && this.isPointOnLineSegment(other.end()))
+            || (o3 == 0 && other.isPointOnLineSegment(this.start))
+            || (o4 == 0 && other.isPointOnLineSegment(this.end))
+        );
     }
     /**
      * Determines whether the Line intersects with the other Lines.
