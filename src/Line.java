@@ -92,15 +92,15 @@ public class Line {
         return (
             ThresholdCompare.isThresholdBasedGreaterEqual(point.getX(), Math.min(this.start.getX(), this.end.getX()))
             && ThresholdCompare.isThresholdBasedGreaterEqual(Math.max(this.start.getX(), this.end.getX()), point.getX())
+            && ThresholdCompare.isThresholdBasedGreaterEqual(point.getY(), Math.min(this.start.getY(), this.end.getY()))
+            && ThresholdCompare.isThresholdBasedGreaterEqual(Math.max(this.start.getY(), this.end.getY()), point.getY())
         );
     }
     /**
      * Determines whether the Line intersects with the other Line.
      * The result is procured through the following set of deductions:
-        * If the orientations o1 and o2 are different, and o3 also differs from o4 the lines form an X shape
-            meaning that the infinite Lines from which the Line segments are cut intersect.
-            From this we derive that if the Points designated with one Line are on the Line Segment of the other
-            the lines intersect
+        * If the orientations o1 and o2 are different, and o3 also differs from o4 the Line Segments form an X shape
+            meaning that they are ought to intersect.
         * If the orientation is equal to 0,
             it means that the third point is on the same infinite line as our Line segment
             meaning that if the Point is between our two points, the lines intersect (we must ensure that is the case)
@@ -114,12 +114,7 @@ public class Line {
         int o4 = other.getOrientationOfPoint(this.end);
 
         if (o1 != o2 && o3 != o4) {
-            // It then follows that the infinite lines intersect
-            // we must ensure that the Line Segments intersect
-            return (
-                this.isPointOnLineSegment(other.start())
-                || this.isPointOnLineSegment(other.end())
-            );
+            return true;
         }
 
         return (
