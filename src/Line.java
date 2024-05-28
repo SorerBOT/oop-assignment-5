@@ -142,6 +142,15 @@ public class Line {
      * @return the intersection Point if the Lines intersect and null otherwise
      */
     public Point intersectionWith(Line other) {
+        if (!isIntersecting(other)) {
+            return null;
+        }
+        int o1 = this.getOrientationOfPoint(other.start());
+        int o2 = this.getOrientationOfPoint(other.end());
+
+        if (o1 == 0 && o2 == 0) {
+            return null;
+        }
     }
     /**
      * Determines whether the Line is equal to the other Line.
