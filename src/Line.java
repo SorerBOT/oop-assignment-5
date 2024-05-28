@@ -55,12 +55,18 @@ public class Line {
         return new Point(this.end);
     }
     /**
-     * Finds the orientation of the third point in respect to the first two
-     * A thorough explanation of this function's inner workings
+     * The orientation of a Point in regards to a Line segment is the 'direction' of the respecful diversion
+     * required for a Line to be drawn between the end of the Line segment and the Point.
+     * The orientation is thus comprised of one of the following three:
+        * Clock-wise
+        * Counter clock-wise
+        * No diversion required
+     * The following funciton finds the orientation of the third point in respect to the first two.
+     * A thorough explanation which delves into the intricacies of this function's inner workings
      * And the list of geometric justifications to its integrity are available in the following link:
      * https://www.youtube.com/watch?v=5FkOO1Wwb8w&ab_channel=EngineerNick.
      * It goes without saying that the following is my own implementation
-     * Of the concepts taught in the video and not an imitation of it.
+     * of the concepts taught in the video and not an imitation of it.
      * @param point the point to be compared with the Line
      * @return 0 if the point is collinear with the Line
      *  1 if it requires a diversion to the left (counter clock-wise) and
