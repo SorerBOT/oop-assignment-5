@@ -55,27 +55,38 @@ public class Line {
         return new Point(this.end);
     }
     /**
-     * @return the slope of the Line
+     * Finds the orientation of the third point in respect to the first two
+     * A thorough explanation of this function's inner workings
+     * And the list of geometric justifications to its integrity are available in the following link:
+     * https://www.youtube.com/watch?v=5FkOO1Wwb8w&ab_channel=EngineerNick.
+     * It goes without saying that the following is my own implementation
+     * Of the concepts taught in the video and not an imitation of it.
+     * @param point the point to be compared with the Line
+     * @return 0 if the point is collinear with the Line
+     *  1 if it requires a diversion to the left (counter clock-wise) and
+     * -1 if it requires a diversion to the right (clock-wise)
      */
-    double getSlope() {
+    public int getOrientationOfPoint(Point point) {
+        double determinant =
+            (this.end.getX() - this.start.getX()) * (point.getY() - this.end.getY())
+            - (this.end.getY() - this.start.getY()) * (point.getX() - this.end.getX());
+        // using threshold based comparison on the determinant (its a double)
+        if (ThresholdCompare.isThresholdBasedEquals(determinant, 0)) {
+            return 0;
+        }
+        return (determinant > 0) ? 1 : -1;
+    }
+    /**
+     * Checks whether an x value is in the Line Segment's range of x values.
+     * @param point the point to be tested
+     * @return true if the Point's x value is within the range of x value for which the Line is defined
+     * and false otherwise
+     */
+    public boolean onSegment(Point point) {
         return (
-            (this.end.getY() - this.start.getY())
-            / (this.end.getX() - this.start.getX())
+            ThresholdCompare.isThresholdBasedGreaterEqual(point.getX(), Math.min(this.start.getX(), this.end.getX()))
+            && ThresholdCompare.isThresholdBasedGreaterEqual(Math.max(this.start.getX(), this.end.getX()), point.getX())
         );
-    }
-    /**
-     * @return the b of the line (y = mx + b)
-     */
-    double getB() {
-        return this.start.getY() - this.getSlope() * this.start.getX();
-    }
-    /**
-     * Gets the Line's y value at said x value.
-     * @param x the x value for which we would like to find the y value
-     * @return the y value at said position
-     */
-    double getYAtX(double x) {
-        return this.getSlope() * x + this.getB();
     }
     /**
      * Determines whether the Line intersects with the other Line.
@@ -83,31 +94,7 @@ public class Line {
      * @return true if the Lines intersect and false otherwise
      */
     public boolean isIntersecting(Line other) {
-        double firstSlope = this.getSlope();
-        double secondSlope = other.getSlope();
-
-        // Given system of equations that are of the form
-        // y = slope*x + b
-        // Derive equation of the form
-        // ax = b
-        // and solve for x
-
-        double a = firstSlope - secondSlope;
-        double b = -(this.getB() - other.getB());
-
-        if (a == 0) {
-            // the lines are parallel, checking whether they collide
-            return b == 0;
-        }
-        double intersectionXValue = b / a;
-
-        double greaterLineXValue = Math.max(this.start.getX(), this.end.getX());
-        double lowerLineXValue = Math.min(this.start.getX(), this.end.getX());
-
-        return (
-            ThresholdCompare.isThresholdBasedGreaterEqual(greaterLineXValue, intersectionXValue)
-            && ThresholdCompare.isThresholdBasedGreaterEqual(intersectionXValue, lowerLineXValue)
-        );
+        
     }
     /**
      * Determines whether the Line intersects with the other Lines.
@@ -127,29 +114,6 @@ public class Line {
      * @return the intersection Point if the Lines intersect and null otherwise
      */
     public Point intersectionWith(Line other) {
-        if (!this.isIntersecting(other)) {
-            return null;
-        }
-        double firstSlope = this.getSlope();
-        double secondSlope = other.getSlope();
-
-        // Given system of equations that are of the form
-        // y = slope*x + b
-        // Derive equation of the form
-        // ax = b
-        // and solve for x
-
-        double a = firstSlope - secondSlope;
-        double b = -(this.getB() - other.getB());
-
-        if (a == 0) {
-            // we know that the lines intersect and that they are parallel
-            // from the above we infer that the lines collide and return null accoringly
-            return null;
-        }
-        double intersectionXValue = b / a;
-        // we know that the lines intersect and so there is no need to validate the intersectionXValue
-        return new Point(intersectionXValue, this.getYAtX(intersectionXValue));
     }
     /**
      * Determines whether the Line is equal to the other Line.
