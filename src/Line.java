@@ -273,6 +273,11 @@ public class Line {
      * @return true if the Lines are equal and false otherwise
      */
     public boolean equals(Line other) {
-        return false;
+        return (
+            this.start.equals(other.start())
+            || this.start.equals(other.end())
+            || this.end.equals(other.start())
+            || this.end.equals(other.end())
+        );
     }
 }
