@@ -262,7 +262,7 @@ public class Line {
             double xValueOfPoint = other.start().getX();
             return new Point(xValueOfPoint, this.getYAtX(xValueOfPoint));
         }
-        // By now we have succesfully dealt with all cases concerning Line Segments that are perpendicular to the main
+        // By now we have successfully dealt with all cases concerning Line Segments that are perpendicular to the main
         // axis and Line Segments that are collinear
         // Thus we can find the equations of the infinite Lines on which the Line Segments fall
         double xValueOfIntersection = -(this.getB() - other.getB()) / (this.getSlope() - other.getSlope());
