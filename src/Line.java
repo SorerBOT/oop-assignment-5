@@ -26,6 +26,34 @@ public class Line {
         this.end = new Point(x2, y2);
     }
     /**
+     * Can only be used under the assumption that the Line is not perpendicular to the main axis.
+     * @return the slope of the Line
+     */
+    double getSlope() {
+        double deltaX = this.end.getX() - this.start.getX();
+        double deltaY = this.end.getY() - this.start.getY();
+
+        if (this.isPerpendicularToMainAxis()) {
+            throw new Error("Cannot calculate slope for perpendicular Lines.");
+        }
+
+        return deltaY / deltaX;
+    }
+    /**
+     * @return the b of the line (y = mx + b)
+     */
+    double getB() {
+        return this.start.getY() - this.getSlope() * this.start.getX();
+    }
+    /**
+     * Gets the Line's y value at said x value.
+     * @param x the x value for which we would like to find the y value
+     * @return the y value at said position
+     */
+    double getYAtX(double x) {
+        return this.getSlope() * x + this.getB();
+    }
+    /**
      * Calculates the length of the Line.
      * @return the length of the Line
      */
@@ -165,9 +193,15 @@ public class Line {
         }
         int o1 = this.getOrientationOfPoint(other.start());
         int o2 = this.getOrientationOfPoint(other.end());
-
+        // In the following code chunk we are to deal with cases in which
+        // the Line Segments are collinear and lie on the same infite Line
         if (o1 == 0 && o2 == 0) {
+            // In order to distinguish a case in which the lines collide from that in which the lines only tangent
+            // to one another we check if they share a common edge point and that each Line has its other point
+            // lying in a different vertical direction from the common point
             if (this.isPerpendicularToMainAxis()) {
+                // In the following cases we approach the problem under the presumption that both lines are
+                // perpendicular to the main axis
                 if (this.start.equals(other.start())) {
                     return (this.isGoingInDifferentDirections(this.start.getY(), this.end.getY(), other.end().getY()))
                         ? new Point(this.start)
@@ -190,6 +224,9 @@ public class Line {
                 }
                 return null;
             }
+            // we are now under the pretext that the lines are not perpendicular, we continue performing an identical
+            // test only now we are using the X values of the Points, and checking for a
+            // horizontal directional change
             if (this.start.equals(other.start())) {
                 return (this.isGoingInDifferentDirections(this.start.getX(), this.end.getX(), other.end().getX()))
                     ? new Point(this.start)
@@ -212,10 +249,26 @@ public class Line {
             }
             return null;
         }
-        return null;
+        // We are now allowed to assume that the Line Segments do not lie on the same
+        // Infinite Line, thus the lines definitely do not collide
+        // Additionally we assume that there can not exist a predicament under which
+        // both Line Segments are perpendicular to the main axis
+        if (this.isPerpendicularToMainAxis()) {
+            double xValueOfPoint = this.start.getX();
+            return new Point(xValueOfPoint, other.getYAtX(xValueOfPoint));
+        }
+        if (other.isPerpendicularToMainAxis()) {
+            double xValueOfPoint = other.start().getX();
+            return new Point(xValueOfPoint, this.getYAtX(xValueOfPoint));
+        }
+        // By now we have succesfully dealt with all cases concerning Line Segments that are perpendicular to the main
+        // axis and Line Segments that are collinear
+        // Thus we can find the equations of the infinite Lines on which the Line Segments fall
+        double xValueOfIntersection = -(this.getB() - other.getB()) / (this.getSlope() - other.getSlope());
+        return new Point(xValueOfIntersection, this.getYAtX(xValueOfIntersection));
     }
     /**
-     * Determines whether the Line is equal to the other Line.
+     * Determines whether the Line is equal to the other Line. (Both Points are shared)
      * @param other the other Line
      * @return true if the Lines are equal and false otherwise
      */
