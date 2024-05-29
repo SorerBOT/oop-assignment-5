@@ -49,6 +49,13 @@ public class Line {
         return new Point(this.start);
     }
     /**
+     * Determines whether the Line Segment is perpendicular to the main axis.
+     * @return true if the Line Segment is perpendicular and false otherwise
+     */
+    public boolean isPerpendicularToMainAxis() {
+        return ThresholdCompare.isThresholdBasedEquals(this.start.getX(), this.end.getX());
+    }
+    /**
      * @return the end Point of the Line
      */
     public Point end() {
@@ -64,7 +71,7 @@ public class Line {
      * The following funciton finds the orientation of the third point in respect to the first two.
      * A thorough explanation which delves into the intricacies of this function's inner workings
      * And the list of geometric justifications to its integrity are available in the following link:
-     * https://www.youtube.com/watch?v=5FkOO1Wwb8w&ab_channel=EngineerNick.
+     * https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/.
      * It goes without saying that the following is my own implementation
      * of the concepts taught in the video and not an imitation of it.
      * @param point the point to be compared with the Line
@@ -137,6 +144,17 @@ public class Line {
         );
     }
     /**
+     * Determine whether a scenario in which the first and second points wrap
+     * around the middle point from different directions.
+     * @param middle the middle Point
+     * @param first the first Point
+     * @param second the second Point
+     * @return true they are going in different directions
+     */
+    public boolean isGoingInDifferentDirections(double middle, double first, double second) {
+        return ((middle - first) * (middle - second) < 0);
+    }
+    /**
      * Calculates the intersection Point of the Line with the other Line.
      * @param other the other Line
      * @return the intersection Point if the Lines intersect and null otherwise
@@ -149,8 +167,52 @@ public class Line {
         int o2 = this.getOrientationOfPoint(other.end());
 
         if (o1 == 0 && o2 == 0) {
+            if (this.isPerpendicularToMainAxis()) {
+                if (this.start.equals(other.start())) {
+                    return (this.isGoingInDifferentDirections(this.start.getY(), this.end.getY(), other.end().getY()))
+                        ? new Point(this.start)
+                        : null;
+                }
+                if (this.start.equals(other.end())) {
+                    return (this.isGoingInDifferentDirections(this.start.getY(), this.end.getY(), other.start().getY()))
+                        ? new Point(this.start)
+                        : null;
+                }
+                if (this.end.equals(other.start())) {
+                    return (this.isGoingInDifferentDirections(this.end.getY(), this.start.getY(), other.end().getY()))
+                        ? new Point(this.end)
+                        : null;
+                }
+                if (this.end.equals(other.end())) {
+                    return (this.isGoingInDifferentDirections(this.end.getY(), this.start.getY(), other.start().getY()))
+                        ? new Point(this.end)
+                        : null;
+                }
+                return null;
+            }
+            if (this.start.equals(other.start())) {
+                return (this.isGoingInDifferentDirections(this.start.getX(), this.end.getX(), other.end().getX()))
+                    ? new Point(this.start)
+                    : null;
+            }
+            if (this.start.equals(other.end())) {
+                return (this.isGoingInDifferentDirections(this.start.getX(), this.end.getX(), other.start().getX()))
+                    ? new Point(this.start)
+                    : null;
+            }
+            if (this.end.equals(other.start())) {
+                return (this.isGoingInDifferentDirections(this.end.getX(), this.start.getX(), other.end().getX()))
+                    ? new Point(this.end)
+                    : null;
+            }
+            if (this.end.equals(other.end())) {
+                return (this.isGoingInDifferentDirections(this.end.getX(), this.start.getX(), other.start().getX()))
+                    ? new Point(this.end)
+                    : null;
+            }
             return null;
         }
+        return null;
     }
     /**
      * Determines whether the Line is equal to the other Line.

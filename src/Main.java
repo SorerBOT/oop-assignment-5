@@ -7,12 +7,15 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Point myPoint = new Point(5.0, 6.9);
-        Point myPoint2 = new Point(9.0, 1.9);
-        Point myPoint3 = new Point(9.0, 1.9);
-        System.out.println(myPoint.distance(myPoint2));
-        System.out.println(myPoint.equals(myPoint2));
-        System.out.println(myPoint3.distance(myPoint2));
-        System.out.println(myPoint3.equals(myPoint2));
+        Point myPoint = new Point(0.0, 0.0);
+        Point myPoint2 = new Point(1.0, 1.0);
+        Line line = new Line(myPoint, myPoint2);
+        Point myPoint3 = new Point(-0.5, -0.5);
+        Point myPoint4 = new Point(0.5, 0.5);
+        Point myPoint5 = new Point(1.5, 1.5);
+
+        System.out.println(line.getOrientationOfPoint(myPoint3));
+        System.out.println(line.getOrientationOfPoint(myPoint4));
+        System.out.println(line.getOrientationOfPoint(myPoint5));
     }
 }
