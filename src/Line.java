@@ -275,10 +275,8 @@ public class Line {
      */
     public boolean equals(Line other) {
         return (
-            this.start.equals(other.start())
-            || this.start.equals(other.end())
-            || this.end.equals(other.start())
-            || this.end.equals(other.end())
+            (this.start.equals(other.start()) && this.end.equals(other.end()))
+            || (this.start.equals(other.end()) && this.end.equals(other.start()))
         );
     }
 }
