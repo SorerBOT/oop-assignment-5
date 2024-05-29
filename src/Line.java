@@ -27,9 +27,10 @@ public class Line {
     }
     /**
      * Can only be used under the assumption that the Line is not perpendicular to the main axis.
-     * @return the slope of the Line
+     * if such is not the case an error must be thrown
+     * @return the slope of the Line if it can be procured by this method of calculation.
      */
-    double getSlope() {
+    public double getSlope() {
         double deltaX = this.end.getX() - this.start.getX();
         double deltaY = this.end.getY() - this.start.getY();
 
@@ -42,7 +43,7 @@ public class Line {
     /**
      * @return the b of the line (y = mx + b)
      */
-    double getB() {
+    public double getB() {
         return this.start.getY() - this.getSlope() * this.start.getX();
     }
     /**
@@ -50,7 +51,7 @@ public class Line {
      * @param x the x value for which we would like to find the y value
      * @return the y value at said position
      */
-    double getYAtX(double x) {
+    public double getYAtX(double x) {
         return this.getSlope() * x + this.getB();
     }
     /**
