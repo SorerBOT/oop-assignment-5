@@ -59,6 +59,65 @@ public class AbstractArtDrawing {
                 radiusOfPoint
             );
         }
+
+        for (int i = 0; i < lines.length - 1; i++) {
+            for (int j = i + 1; j < lines.length; j++) {
+                Point intersectionPoint = lines[i].intersectionWith(lines[j]);
+                if (intersectionPoint == null) {
+                    continue;
+                }
+                drawSurface.setColor(Color.RED);
+                drawSurface.fillCircle(
+                    (int) intersectionPoint.getX(),
+                    (int) intersectionPoint.getY(),
+                    radiusOfPoint
+                );
+            }
+        }
+
+        for (int i = 0; i < lines.length - 2; i++) {
+            for (int j = i + 1; j < lines.length - 1; j++) {
+                for (int k = j + 1; k < lines.length; k++) {
+                    Point firstTriangleVertex = lines[i].intersectionWith(lines[j]);
+                    Point secondTriangleVertex = lines[i].intersectionWith(lines[k]);
+                    Point thirdTriangleVertex = lines[j].intersectionWith(lines[k]);
+
+                    if (
+                        firstTriangleVertex == null
+                        || secondTriangleVertex == null
+                        || thirdTriangleVertex == null
+                    ) {
+                            continue;
+                    }
+
+                    Line firstTriangleSide = new Line(firstTriangleVertex, secondTriangleVertex);
+                    Line secondTriangleSide = new Line(firstTriangleVertex, thirdTriangleVertex);
+                    Line thirdTriangleSide = new Line(secondTriangleVertex, thirdTriangleVertex);
+
+                    drawSurface.setColor(Color.GREEN);
+                    drawSurface.drawLine(
+                        (int) firstTriangleSide.start().getX(),
+                        (int) firstTriangleSide.start().getY(),
+                        (int) firstTriangleSide.end().getX(),
+                        (int) firstTriangleSide.end().getY()
+                    );
+                    drawSurface.setColor(Color.GREEN);
+                    drawSurface.drawLine(
+                        (int) secondTriangleSide.start().getX(),
+                        (int) secondTriangleSide.start().getY(),
+                        (int) secondTriangleSide.end().getX(),
+                        (int) secondTriangleSide.end().getY()
+                    );
+                    drawSurface.setColor(Color.GREEN);
+                    drawSurface.drawLine(
+                        (int) thirdTriangleSide.start().getX(),
+                        (int) thirdTriangleSide.start().getY(),
+                        (int) thirdTriangleSide.end().getX(),
+                        (int) thirdTriangleSide.end().getY()
+                    );
+                }
+            }
+        }
         gui.show(drawSurface);
     }
     /**
