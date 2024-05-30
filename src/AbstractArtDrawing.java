@@ -126,6 +126,6 @@ public class AbstractArtDrawing {
      */
     public static void main(String[] args) {
         AbstractArtDrawing runner = new AbstractArtDrawing();
-        runner.drawRandomLines(1920, 1080, 10, 3);
+        runner.drawRandomLines(400, 300, 10, 3);
     }
 }
