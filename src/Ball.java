@@ -7,6 +7,7 @@ public class Ball {
     private Point center;
     private int radius;
     private Color color;
+    private Velocity velocity;
 
     /**
      * Constructor of the Ball class.
@@ -79,5 +80,12 @@ public class Ball {
             this.getY(),
             this.radius
         );
+    }
+    /**
+     * Changes the Velocity of the Ball.
+     * @param v the new Velocity of the Ball
+     */
+    public void setVelocity(Velocity v) {
+        this.velocity = new Velocity(v);
     }
 }
