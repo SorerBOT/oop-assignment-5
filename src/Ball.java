@@ -1,0 +1,83 @@
+import java.awt.Color;
+import biuoop.DrawSurface;
+/**
+ * Forced to create this JDOC due to checkstyles.
+ */
+public class Ball {
+    private Point center;
+    private int radius;
+    private Color color;
+
+    /**
+     * Constructor of the Ball class.
+     * @param center the center of the Ball
+     * @param r the radius of the Ball
+     * @param color the color of the Ball
+     */
+    public Ball(Point center, int r, Color color) {
+        this.center = new Point(center);
+        this.radius = r;
+        this.color = new Color(
+            color.getRed(),
+            color.getGreen(),
+            color.getBlue(),
+            color.getAlpha()
+        );
+    }
+    /**
+     * Constructs a Point then a Ball utilising it.
+     * Calls the Point based constructor
+     * @param x the X value of the Point
+     * @param y the Y value of the Point
+     * @param r the radius value of the Ball
+     * @param color the color of the Ball
+     */
+    public Ball(int x, int y, int r, Color color) {
+        this(new Point(x, y), r, color);
+    }
+    /**
+     * Returns the X value of the center Point.
+     * @return the X value of the center Point
+     */
+    public int getX() {
+        return (int) this.center.getX();
+    }
+    /**
+     * Returns the Y value of the center Point.
+     * @return the Y value of the center Point
+     */
+    public int getY() {
+        return (int) this.center.getY();
+    }
+    /**
+     * Returns the radius of the Ball.
+     * @return the radius of the Ball
+     */
+    public int getSize() {
+        return this.radius;
+    }
+    /**
+     * Returns the color of the Ball.
+     * @return Returns the color of the Ball
+     */
+    public Color getColor() {
+        return new Color(
+            color.getRed(),
+            color.getGreen(),
+            color.getBlue(),
+            color.getAlpha()
+        );
+    }
+    /**
+     * Draws the Ball on the surface.
+     * @param surface the surface on which the Ball must be drawn
+     */
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(this.color);
+        surface.fillCircle(
+            this.getX(),
+            this.getY(),
+            this.radius
+        );
+    }
+}
