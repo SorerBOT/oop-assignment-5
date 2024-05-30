@@ -26,6 +26,16 @@ public class Ball {
         );
     }
     /**
+     * Constructor of the Ball class.
+     * @param x the X value of the Point
+     * @param y the Y value of the Point
+     * @param r the radius value of the Ball
+     * @param color the color of the Ball
+     */
+    public Ball(double x, double y, int r, Color color) {
+        this((int) x, (int) y, r, color);
+    }
+    /**
      * Constructs a Point then a Ball utilising it.
      * Calls the Point based constructor
      * @param x the X value of the Point
@@ -87,5 +97,26 @@ public class Ball {
      */
     public void setVelocity(Velocity v) {
         this.velocity = new Velocity(v);
+    }
+    /**
+     * Changes the Velocity of the Ball.
+     * @param dx the new dx value of the Velocity
+     * @param dy the new dy value of the Velocity
+     */
+    public void setVelocity(double dx, double dy) {
+        this.velocity = new Velocity(dx, dy);
+    }
+    /**
+     * Returns the Velocity object of the Ball.
+     * @return the velocity object of the Ball
+     */
+    public Velocity getVelocity() {
+        return new Velocity(this.velocity);
+    }
+    /**
+     * moves the center Point one step.
+     */
+    public void moveOneStep() {
+        this.center = this.getVelocity().applyToPoint(this.center);
     }
 }

@@ -1,4 +1,5 @@
 import biuoop.GUI;
+import biuoop.Sleeper;
 import biuoop.DrawSurface;
 /**
  * Forced to create this JDOC due to checkstyles.
@@ -6,14 +7,18 @@ import biuoop.DrawSurface;
 public class BallsTest1 {
     /**
      * Draws an animation.
+     * @param start the starting point
+     * @param dx the dx
+     * @param dy the dy
      */
-    public static void drawAnimation() {
-        GUI gui = new GUI("title", 1920, 1080);
-        biuoop.Sleeper sleeper = new biuoop.Sleeper();
-        java.util.Random rand = new java.util.Random();
+    public static void drawAnimation(Point start, double dx, double dy) {
+        GUI gui = new GUI("title", 200, 200);
+        Sleeper sleeper = new Sleeper();
+        Ball ball = new Ball(start.getX(), start.getY(), 30, java.awt.Color.BLACK);
+        ball.setVelocity(dx, dy);
         while (true) {
+            ball.moveOneStep();
             DrawSurface d = gui.getDrawSurface();
-            Ball ball = new Ball(rand.nextInt(1920), rand.nextInt(1080), 30, java.awt.Color.BLACK);
             ball.drawOn(d);
             gui.show(d);
             sleeper.sleepFor(50); // wait for 50 milliseconds.
@@ -23,7 +28,7 @@ public class BallsTest1 {
      * Bafoonery.
      */
     public static void main(String[] args) {
-        drawAnimation();
+        drawAnimation(new Point(100, 100), 1, 1);
         return;
         //GUI gui = new GUI("Balls Test 1",  400,  400);
         //DrawSurface d = gui.getDrawSurface();

@@ -1,8 +1,24 @@
-// Velocity specifies the change in position on the `x` and the `y` axes.
+/**
+ * Forced to create this JDOC due to checkstyles.
+ */
 public class Velocity {
     private double dx;
     private double dy;
 
+    /**
+     * Returns the Velocity object's dx value.
+     * @return the Velocity object's dx value
+     */
+    public double getDx() {
+        return this.dx;
+    }
+    /**
+     * Returns the Velocity object's dy value.
+     * @return the Velocity object's dy value
+     */
+    public double getDy() {
+        return this.dy;
+    }
     /**
      * Constructor of the Velocity class.
      * @param dx delta of x
@@ -17,7 +33,7 @@ public class Velocity {
      * @param velocity the Velocity object to be copied
      */
     public Velocity(Velocity velocity) {
-        return this(velocity.getDx(), velocity.getDy());
+        this(velocity.getDx(), velocity.getDy());
     }
     /**
      * Slightly tweaks coordinates of the Point.
@@ -29,19 +45,5 @@ public class Velocity {
             p.getX() + this.dx,
             p.getY() + this.dy
         );
-    }
-    /**
-     * Returns the Velocity object's dx value.
-     * @return the Velocity object's dx value
-     */
-    public double getDx() {
-        return this.dx;
-    }
-    /**
-     * Returns the Velocity object's dy value.
-     * @return the Velocity object's dy value
-     */
-    public double getDy() {
-        return this.dy;
     }
 }
