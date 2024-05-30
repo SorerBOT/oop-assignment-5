@@ -26,6 +26,13 @@ public class Line {
         this.end = new Point(x2, y2);
     }
     /**
+     * Attests to whether the Line provided is a mere Point.
+     * @return true if the starting Point is equal to the ending Point and false otherwise
+     */
+    public boolean isLineAPoint() {
+        return this.start.equals(this.end);
+    }
+    /**
      * Can only be used under the assumption that the Line is not perpendicular to the main axis.
      * if such is not the case an error must be thrown
      * @return the slope of the Line if it can be procured by this method of calculation.
@@ -33,7 +40,11 @@ public class Line {
     public double getSlope() {
         double deltaX = this.end.getX() - this.start.getX();
         double deltaY = this.end.getY() - this.start.getY();
-
+        // A Line which is a mere Point is perpendicular and thus a slope cannot be derived for it
+        // used two if's to ease debugging
+        if (this.isLineAPoint()) {
+            throw new Error("Cannot calculate slope for a Point.");
+        }
         if (this.isPerpendicularToMainAxis()) {
             throw new Error("Cannot calculate slope for perpendicular Lines.");
         }
@@ -52,7 +63,9 @@ public class Line {
      * @return the y value at said position
      */
     public double getYAtX(double x) {
-        return this.getSlope() * x + this.getB();
+        return this.isLineAPoint()
+            ? this.start.getY()
+            : this.getSlope() * x + this.getB();
     }
     /**
      * Calculates the length of the Line.
@@ -191,6 +204,12 @@ public class Line {
     public Point intersectionWith(Line other) {
         if (!isIntersecting(other)) {
             return null;
+        }
+        if (this.isLineAPoint()) {
+            return new Point(this.start);
+        }
+        if (other.isLineAPoint()) {
+            return new Point(other.start);
         }
         int o1 = this.getOrientationOfPoint(other.start());
         int o2 = this.getOrientationOfPoint(other.end());
