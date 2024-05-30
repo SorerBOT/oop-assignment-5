@@ -31,19 +31,32 @@ public class AbstractArtDrawing {
      * @param width the width of the screen
      * @param height the height of the screen
      * @param amountOfLines the amount of Lines
+     * @param radiusOfPoint the radius of the Points
      */
-    public void drawRandomLines(int width, int height, int amountOfLines) {
+    public void drawRandomLines(
+        int width,
+        int height,
+        int amountOfLines,
+        int radiusOfPoint
+    ) {
         GUI gui = new GUI("Eye lineR", width, height);
         DrawSurface drawSurface = gui.getDrawSurface();
         Line[] lines = generateRandomLines(width, height, amountOfLines);
 
         for (Line line : lines) {
-            drawSurface.setColor(Color.RED);
+            Point lineMiddlePoint = line.middle();
+            drawSurface.setColor(Color.BLACK);
             drawSurface.drawLine(
                 (int) line.start().getX(),
                 (int) line.start().getY(),
                 (int) line.end().getX(),
                 (int) line.end().getY()
+            );
+            drawSurface.setColor(Color.BLUE);
+            drawSurface.fillCircle(
+                (int) lineMiddlePoint.getX(),
+                (int) lineMiddlePoint.getY(),
+                radiusOfPoint
             );
         }
         gui.show(drawSurface);
@@ -54,6 +67,6 @@ public class AbstractArtDrawing {
      */
     public static void main(String[] args) {
         AbstractArtDrawing runner = new AbstractArtDrawing();
-        runner.drawRandomLines(1920, 1080, 10);
+        runner.drawRandomLines(1920, 1080, 10, 3);
     }
 }
