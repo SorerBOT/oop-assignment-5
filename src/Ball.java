@@ -24,6 +24,7 @@ public class Ball {
             color.getBlue(),
             color.getAlpha()
         );
+        this.velocity = new Velocity();
     }
     /**
      * Constructor of the Ball class.

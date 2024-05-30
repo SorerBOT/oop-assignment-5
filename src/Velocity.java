@@ -20,6 +20,12 @@ public class Velocity {
         return this.dy;
     }
     /**
+     * Empty constructor of Velocity class.
+     */
+    public Velocity() {
+        this(0, 0);
+    }
+    /**
      * Constructor of the Velocity class.
      * @param dx delta of x
      * @param dy delta of y
