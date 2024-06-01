@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.awt.Color;
 import biuoop.DrawSurface;
 /**
@@ -8,7 +9,6 @@ public class Ball {
     private int radius;
     private Color color;
     private Velocity velocity;
-    private Screen screen;
 
     /**
      * Constructor of the Ball class.
@@ -26,7 +26,6 @@ public class Ball {
             color.getAlpha()
         );
         this.velocity = new Velocity();
-        this.screen = new Screen(200, 200);
     }
     /**
      * Constructor of the Ball class.
@@ -48,6 +47,15 @@ public class Ball {
      */
     public Ball(int x, int y, int r, Color color) {
         this(new Point(x, y), r, color);
+    }
+    public Ball(int r, Color color) {
+        Random random = new Random();
+        this(
+            random.nextDouble(Screen.WIDTH + 1),
+            random.nextDouble(Screen.HEIGHT + 1),
+            r,
+            color
+        );
     }
     /**
      * Returns the X value of the center Point.
@@ -117,25 +125,18 @@ public class Ball {
         return new Velocity(this.velocity);
     }
     /**
-     * Getter of the Screen of the Ball.
-     * @return the Screen of the Ball
-     */
-    public Screen getScreen() {
-        return new Screen(this.screen);
-    }
-    /**
      * moves the center Point one step.
      */
     public void moveOneStep() {
         if (
             this.center.getX() <= this.radius
-            || this.screen.getWidth() - this.radius <= this.center.getX()
+            || Screen.WIDTH - this.radius <= this.center.getX()
         ) {
             this.velocity.setDx(-this.velocity.getDx());
         }
         if (
             this.center.getY() <= this.radius
-            || this.screen.getHeight() - this.radius <= this.center.getY()
+            || Screen.HEIGHT - this.radius <= this.center.getY()
         ) {
             this.velocity.setDy(-this.velocity.getDy());
         }

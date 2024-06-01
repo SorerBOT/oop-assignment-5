@@ -4,7 +4,7 @@
 public class BouncingBallAnimation {
     /**
      * Calls the drawAnimation method using command line arguments.
-     * @param args
+     * @param args array of CLI arguments
      */
     public static void main(String[] args) {
         if (args.length < 4) {

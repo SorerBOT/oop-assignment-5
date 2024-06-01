@@ -1,7 +1,7 @@
-import biuoop.GUI;
-import biuoop.DrawSurface;
 import java.util.Random;
 import java.awt.Color;
+import biuoop.GUI;
+import biuoop.DrawSurface;
 /**
  * Compelled to create this comments by checkstyles.
  */
@@ -18,10 +18,10 @@ public class AbstractArtDrawing {
         Line[] lines = new Line[amountOfLines];
         for (int i = 0; i < lines.length; i++) {
             lines[i] = new Line(
-                random.nextInt(height) + 1,
-                random.nextInt(height) + 1,
-                random.nextInt(width) + 1,
-                random.nextInt(height) + 1
+                random.nextInt(width + 1),
+                random.nextInt(height + 1),
+                random.nextInt(width + 1),
+                random.nextInt(height + 1)
             );
         }
         return lines;
@@ -39,7 +39,7 @@ public class AbstractArtDrawing {
         int amountOfLines,
         int radiusOfPoint
     ) {
-        GUI gui = new GUI("Eye lineR", width, height);
+        GUI gui = new GUI("Abstract Art Drawing", width, height);
         DrawSurface drawSurface = gui.getDrawSurface();
         Line[] lines = generateRandomLines(width, height, amountOfLines);
 
