@@ -49,6 +49,25 @@ public class Velocity {
         this.dy = dy;
     }
     /**
+     * Creates a new Velocity object from angle and speed.
+     * @param angle the angle of the Velocity instance
+     * @param speed the speed of the Velocity instance
+     * @return the new Velocity instance
+     */
+    public static Velocity fromAngleAndSpeed(double angle, double speed) {
+        // Parses the angle provided to an angle which can be used in regular trigonometric calculations
+        // (Up == 90 degrees)
+        double normalAngle = angle + 90;
+        double angleInRadians = (normalAngle * 2 * Math.PI) / 360;
+        double dx = speed * Math.cos(angleInRadians);
+        // Normal cartesian axis' consider upward motion to be represented by positive
+        // change of coordinates.
+        // The computer screen's representation of the axis' uses a Matrix
+        // in which the positive change of coordinates represents downward motion
+        double dy = -speed * Math.sin(angleInRadians);
+        return new Velocity(dx, dy);
+    }
+    /**
      * Copy constructor of Velocity.
      * @param velocity the Velocity object to be copied
      */

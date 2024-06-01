@@ -15,7 +15,7 @@ public class BallsTest1 {
         Ball ball = new Ball(start.getX(), start.getY(), 30, java.awt.Color.BLACK);
         GUI gui = new GUI("title", ball.getScreen().getWidth(), ball.getScreen().getHeight());
         Sleeper sleeper = new Sleeper();
-        ball.setVelocity(dx, dy);
+        ball.setVelocity(Velocity.fromAngleAndSpeed(225, 5));
         while (true) {
             ball.moveOneStep();
             DrawSurface d = gui.getDrawSurface();
@@ -30,14 +30,5 @@ public class BallsTest1 {
     public static void main(String[] args) {
         drawAnimation(new Point(100, 100), 10, 15);
         return;
-        //GUI gui = new GUI("Balls Test 1",  400,  400);
-        //DrawSurface d = gui.getDrawSurface();
-        //Ball b1 = new Ball(new Point(100, 100), 30, java.awt.Color.RED);
-        //Ball b2 = new Ball(new Point(100, 150), 10, java.awt.Color.BLUE);
-        //Ball b3 = new Ball(new Point(80, 249), 50, java.awt.Color.GREEN);
-        //b1.drawOn(d);
-        //b2.drawOn(d);
-        //b3.drawOn(d);
-        //gui.show(d);
     }
 }
