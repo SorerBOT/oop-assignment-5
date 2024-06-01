@@ -132,14 +132,14 @@ public class Ball {
      */
     public void moveOneStep() {
         if (
-            this.center.getX() <= this.radius
-            || Screen.WIDTH - this.radius <= this.center.getX()
+            ThresholdCompare.isThresholdBasedGreaterEqual(this.radius, this.center.getX())
+            || ThresholdCompare.isThresholdBasedGreaterEqual(this.center.getX(), Screen.WIDTH - this.radius)
         ) {
             this.velocity.setDx(-this.velocity.getDx());
         }
         if (
-            this.center.getY() <= this.radius
-            || Screen.HEIGHT - this.radius <= this.center.getY()
+            ThresholdCompare.isThresholdBasedGreaterEqual(this.radius, this.center.getY())
+            || ThresholdCompare.isThresholdBasedGreaterEqual(this.center.getY(), Screen.HEIGHT - this.radius)
         ) {
             this.velocity.setDy(-this.velocity.getDy());
         }
