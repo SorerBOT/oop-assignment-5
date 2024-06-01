@@ -15,9 +15,8 @@ public class Ball {
      * @param center the center of the Ball
      * @param r the radius of the Ball
      * @param color the color of the Ball
-     * @param screen the screen of the Ball (saves the width and height of the screen)
      */
-    public Ball(Point center, int r, Color color, Screen screen) {
+    public Ball(Point center, int r, Color color) {
         this.center = new Point(center);
         this.radius = r;
         this.color = new Color(
@@ -27,7 +26,7 @@ public class Ball {
             color.getAlpha()
         );
         this.velocity = new Velocity();
-        this.screen = new Screen(screen);
+        this.screen = new Screen(200, 200);
     }
     /**
      * Constructor of the Ball class.
@@ -35,10 +34,9 @@ public class Ball {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
-     * @param screen the screen to be attached to the Ball
      */
-    public Ball(double x, double y, int r, Color color, Screen screen) {
-        this((int) x, (int) y, r, color, screen);
+    public Ball(double x, double y, int r, Color color) {
+        this((int) x, (int) y, r, color);
     }
     /**
      * Constructs a Point then a Ball utilising it.
@@ -47,10 +45,9 @@ public class Ball {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
-     * @param screen the screen to be attached to the Ball
      */
-    public Ball(int x, int y, int r, Color color, Screen screen) {
-        this(new Point(x, y), r, color, screen);
+    public Ball(int x, int y, int r, Color color) {
+        this(new Point(x, y), r, color);
     }
     /**
      * Returns the X value of the center Point.
@@ -118,6 +115,13 @@ public class Ball {
      */
     public Velocity getVelocity() {
         return new Velocity(this.velocity);
+    }
+    /**
+     * Getter of the Screen of the Ball.
+     * @return the Screen of the Ball
+     */
+    public Screen getScreen() {
+        return new Screen(this.screen);
     }
     /**
      * moves the center Point one step.
