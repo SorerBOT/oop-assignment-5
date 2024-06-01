@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.awt.Color;
 import biuoop.GUI;
 import biuoop.Sleeper;
@@ -13,9 +14,16 @@ public class MultipleBouncingBallsAnimation {
      * @return an array of Balls
      */
     public static Ball[] generateRandomBalls(String[] sizesArray) {
+        Random random = new Random();
         Ball[] balls = new Ball[sizesArray.length];
         for (int i = 0; i < sizesArray.length; i++) {
-            balls[i] = new Ball(Integer.parseInt(sizesArray[i]), Color.BLACK);
+            Ball ball = new Ball(Integer.parseInt(sizesArray[i]), Color.BLACK);
+            int speed = Math.max(1, ball.getSize() / 50);
+            // nextDouble(x) returns a number between 0 and x-1, adding 1
+            // not using 361 for the sake of simplicity
+            double angle = random.nextDouble(360 + 1);
+            ball.setVelocity(Velocity.fromAngleAndSpeed(angle, speed));
+            balls[i] = ball;
         }
         return balls;
     }
@@ -27,7 +35,7 @@ public class MultipleBouncingBallsAnimation {
         if (args.length == 0) {
             return;
         }
-        GUI gui = new GUI("Multiple BOuncing Balls Animation", Screen.WIDTH, Screen.HEIGHT);
+        GUI gui = new GUI("Multiple Bouncing Balls Animation", Screen.WIDTH, Screen.HEIGHT);
         Ball[] balls = generateRandomBalls(args);
         Sleeper sleeper = new Sleeper();
         while (true) {
