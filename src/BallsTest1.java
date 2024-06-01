@@ -11,11 +11,11 @@ public class BallsTest1 {
      * @param dx the dx
      * @param dy the dy
      */
-    public static void drawAnimation(Point start, double dx, double dy) {
-        GUI gui = new GUI("title", 200, 200);
+    public static void drawAnimation(Point start, double dx, double dy, Screen screen) {
+        GUI gui = new GUI("title", screen.getWidth(), screen.getHeight());
         Sleeper sleeper = new Sleeper();
-        Ball ball = new Ball(start.getX(), start.getY(), 30, java.awt.Color.BLACK);
-        //ball.setVelocity(dx, dy);
+        Ball ball = new Ball(start.getX(), start.getY(), 30, java.awt.Color.BLACK, screen);
+        ball.setVelocity(dx, dy);
         while (true) {
             ball.moveOneStep();
             DrawSurface d = gui.getDrawSurface();
@@ -28,7 +28,8 @@ public class BallsTest1 {
      * Bafoonery.
      */
     public static void main(String[] args) {
-        drawAnimation(new Point(100, 100), 1, 1);
+        Screen screen = new Screen(200, 200);
+        drawAnimation(new Point(100, 100), 10, 15, screen);
         return;
         //GUI gui = new GUI("Balls Test 1",  400,  400);
         //DrawSurface d = gui.getDrawSurface();

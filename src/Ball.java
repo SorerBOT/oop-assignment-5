@@ -8,14 +8,16 @@ public class Ball {
     private int radius;
     private Color color;
     private Velocity velocity;
+    private Screen screen;
 
     /**
      * Constructor of the Ball class.
      * @param center the center of the Ball
      * @param r the radius of the Ball
      * @param color the color of the Ball
+     * @param screen the screen of the Ball (saves the width and height of the screen)
      */
-    public Ball(Point center, int r, Color color) {
+    public Ball(Point center, int r, Color color, Screen screen) {
         this.center = new Point(center);
         this.radius = r;
         this.color = new Color(
@@ -25,6 +27,7 @@ public class Ball {
             color.getAlpha()
         );
         this.velocity = new Velocity();
+        this.screen = new Screen(screen);
     }
     /**
      * Constructor of the Ball class.
@@ -118,6 +121,18 @@ public class Ball {
      * moves the center Point one step.
      */
     public void moveOneStep() {
+        if (
+            this.center.getX() <= this.radius
+            || 200 - this.radius <= this.center.getX()
+        ) {
+            this.velocity.setDx(-this.velocity.getDx());
+        }
+        if (
+            this.center.getY() <= this.radius
+            || 200 - this.radius <= this.center.getY()
+        ) {
+            this.velocity.setDy(-this.velocity.getDy());
+        }
         this.center = this.getVelocity().applyToPoint(this.center);
     }
 }

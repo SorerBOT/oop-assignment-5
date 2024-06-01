@@ -20,6 +20,20 @@ public class Velocity {
         return this.dy;
     }
     /**
+     * Sets the dx value of the Velocity.
+     * @param dx the new value
+     */
+    public void setDx(double dx) {
+        this.dx = dx;
+    }
+    /**
+     * Sets the dy value of the Velocity.
+     * @param dy the new value
+     */
+    public void setDy(double dy) {
+        this.dy = dy;
+    }
+    /**
      * Empty constructor of Velocity class.
      */
     public Velocity() {
