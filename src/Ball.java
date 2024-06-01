@@ -48,14 +48,17 @@ public class Ball {
     public Ball(int x, int y, int r, Color color) {
         this(new Point(x, y), r, color);
     }
+    /**
+     * Random Ball constructor.
+     * @param r the radius of the Ball
+     * @param color the color of the Ball
+     */
     public Ball(int r, Color color) {
         Random random = new Random();
-        this(
-            random.nextDouble(Screen.WIDTH + 1),
-            random.nextDouble(Screen.HEIGHT + 1),
-            r,
-            color
-        );
+        this.center = new Point(random.nextInt(Screen.WIDTH + 1), random.nextInt(Screen.HEIGHT + 1));
+        this.radius = r;
+        this.color = color;
+        this.velocity = new Velocity();
     }
     /**
      * Returns the X value of the center Point.

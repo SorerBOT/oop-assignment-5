@@ -14,8 +14,8 @@ public class BallsTest1 {
     public static void drawAnimation(Point start, double dx, double dy) {
         Ball ball = new Ball(start.getX(), start.getY(), 30, java.awt.Color.BLACK);
         GUI gui = new GUI("title", Screen.WIDTH, Screen.HEIGHT);
-        Sleeper sleeper = new Sleeper();
         ball.setVelocity(Velocity.fromAngleAndSpeed(225, 5));
+        Sleeper sleeper = new Sleeper();
         while (true) {
             ball.moveOneStep();
             DrawSurface d = gui.getDrawSurface();

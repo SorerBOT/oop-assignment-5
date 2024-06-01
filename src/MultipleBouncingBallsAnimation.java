@@ -1,5 +1,7 @@
 import java.awt.Color;
 import biuoop.GUI;
+import biuoop.Sleeper;
+import biuoop.DrawSurface;
 /**
  * Forced to create this JDOC due to checkstyles.
  */
@@ -27,5 +29,15 @@ public class MultipleBouncingBallsAnimation {
         }
         GUI gui = new GUI("Multiple BOuncing Balls Animation", Screen.WIDTH, Screen.HEIGHT);
         Ball[] balls = generateRandomBalls(args);
+        Sleeper sleeper = new Sleeper();
+        while (true) {
+            DrawSurface d = gui.getDrawSurface();
+            for (Ball ball : balls) {
+                ball.moveOneStep();
+                ball.drawOn(d);
+            }
+            gui.show(d);
+            sleeper.sleepFor(50); // wait for 50 milliseconds.
+        }
     }
 }
