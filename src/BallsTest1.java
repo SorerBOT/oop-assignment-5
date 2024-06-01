@@ -10,6 +10,7 @@ public class BallsTest1 {
      * @param start the starting point
      * @param dx the dx
      * @param dy the dy
+     * @param screen the screen
      */
     public static void drawAnimation(Point start, double dx, double dy, Screen screen) {
         GUI gui = new GUI("title", screen.getWidth(), screen.getHeight());
@@ -28,7 +29,7 @@ public class BallsTest1 {
      * Bafoonery.
      */
     public static void main(String[] args) {
-        Screen screen = new Screen(200, 200);
+        Screen screen = new Screen(1920, 1080);
         drawAnimation(new Point(100, 100), 10, 15, screen);
         return;
         //GUI gui = new GUI("Balls Test 1",  400,  400);

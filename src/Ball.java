@@ -35,9 +35,10 @@ public class Ball {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
+     * @param screen the screen to be attached to the Ball
      */
-    public Ball(double x, double y, int r, Color color) {
-        this((int) x, (int) y, r, color);
+    public Ball(double x, double y, int r, Color color, Screen screen) {
+        this((int) x, (int) y, r, color, screen);
     }
     /**
      * Constructs a Point then a Ball utilising it.
@@ -46,9 +47,10 @@ public class Ball {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
+     * @param screen the screen to be attached to the Ball
      */
-    public Ball(int x, int y, int r, Color color) {
-        this(new Point(x, y), r, color);
+    public Ball(int x, int y, int r, Color color, Screen screen) {
+        this(new Point(x, y), r, color, screen);
     }
     /**
      * Returns the X value of the center Point.
@@ -123,13 +125,13 @@ public class Ball {
     public void moveOneStep() {
         if (
             this.center.getX() <= this.radius
-            || 200 - this.radius <= this.center.getX()
+            || this.screen.getWidth() - this.radius <= this.center.getX()
         ) {
             this.velocity.setDx(-this.velocity.getDx());
         }
         if (
             this.center.getY() <= this.radius
-            || 200 - this.radius <= this.center.getY()
+            || this.screen.getHeight() - this.radius <= this.center.getY()
         ) {
             this.velocity.setDy(-this.velocity.getDy());
         }

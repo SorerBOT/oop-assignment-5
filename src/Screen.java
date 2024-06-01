@@ -1,6 +1,6 @@
 /**
  * This class is going to be used as a way of preserving
- * miscellaneous information of the screen
+ * miscellaneous information of the screen.
  */
 public class Screen {
     private int width;
