@@ -20,7 +20,7 @@ public class MultipleFramesBouncingBallsAnimation {
         ContainedBall[] balls = new ContainedBall[lengthOfContainedBalls];
         for (int i = 0; i < lengthOfContainedBalls; i++) {
             ContainedBall ball = new ContainedBall(Integer.parseInt(sizesArray[i]), Color.RED, container);
-            int speed = Math.max(1, 50 / ball.getSize());
+            int speed = Math.max(11 - ball.getSize() / 5, 1);
             // nextDouble(x) returns a number between 0 and x-1, adding 1
             // not using 361 for the sake of simplicity
             double angle = random.nextDouble(360 + 1);
@@ -41,7 +41,7 @@ public class MultipleFramesBouncingBallsAnimation {
         Sleeper sleeper = new Sleeper();
         Container greyContainer = new Container(new Point(50, 50), new Point(500, 500));
         Container yellowContainer = new Container(new Point(450, 450), new Point(650, 650));
-        Ball[] balls = generateRandomBalls(args, greyContainer);
+        ContainedBall[] balls = generateRandomBalls(args, greyContainer);
 
         while (true) {
             DrawSurface drawSurface = gui.getDrawSurface();
@@ -52,6 +52,10 @@ public class MultipleFramesBouncingBallsAnimation {
                 greyContainer.getWidth(),
                 greyContainer.getHeight()
             );
+            for (ContainedBall ball : balls) {
+                ball.moveOneStep();
+                ball.drawOn(drawSurface);
+            }
             drawSurface.setColor(Color.YELLOW);
             drawSurface.fillRectangle(
                 (int) yellowContainer.getTopLeft().getX(),
@@ -59,10 +63,6 @@ public class MultipleFramesBouncingBallsAnimation {
                 yellowContainer.getWidth(),
                 yellowContainer.getHeight()
             );
-            for (Ball ball : balls) {
-                ball.moveOneStep();
-                ball.drawOn(drawSurface);
-            }
             gui.show(drawSurface);
             sleeper.sleepFor(50); // wait for 50 milliseconds.
         }

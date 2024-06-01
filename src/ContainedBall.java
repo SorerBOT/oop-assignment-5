@@ -43,11 +43,11 @@ public class ContainedBall extends Ball {
         return (
             ThresholdCompare.isThresholdBasedGreaterEqual(
                 this.getSize(),
-                Math.abs(this.container.getTopLeft().getY() - this.getY())
+                this.getY() - this.container.getTopLeft().getY()
             )
             || ThresholdCompare.isThresholdBasedGreaterEqual(
                 this.getSize(),
-                Math.abs(this.container.getBottomRight().getY() - this.getY())
+                this.container.getBottomRight().getY() - this.getY()
             )
         );
     }
@@ -59,11 +59,11 @@ public class ContainedBall extends Ball {
         return (
             ThresholdCompare.isThresholdBasedGreaterEqual(
                 this.getSize(),
-                Math.abs(this.container.getTopLeft().getX() - this.getX())
+                this.getX() - this.container.getTopLeft().getX()
             )
             || ThresholdCompare.isThresholdBasedGreaterEqual(
                 this.getSize(),
-                Math.abs(this.container.getBottomRight().getX() - this.getX())
+                this.container.getBottomRight().getX() - this.getX()
             )
         );
     }
