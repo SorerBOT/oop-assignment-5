@@ -8,7 +8,7 @@ import biuoop.DrawSurface;
  */
 public class MultipleBouncingBallsAnimation {
     /**
-     * Generates random balls.
+     * Generates random Ball.
      * @param sizesArray an array featuring the sizes of the Balls
      * which are ought to be created. (represented using Strings)
      * @return an array of Balls
@@ -18,7 +18,7 @@ public class MultipleBouncingBallsAnimation {
         Ball[] balls = new Ball[sizesArray.length];
         for (int i = 0; i < sizesArray.length; i++) {
             Ball ball = new Ball(Integer.parseInt(sizesArray[i]), Color.BLACK);
-            int speed = Math.max(1, ball.getSize() / 50);
+            int speed = Math.max(1, 50 / ball.getSize());
             // nextDouble(x) returns a number between 0 and x-1, adding 1
             // not using 361 for the sake of simplicity
             double angle = random.nextDouble(360 + 1);

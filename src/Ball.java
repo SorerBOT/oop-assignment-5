@@ -11,6 +11,19 @@ public class Ball {
     private Velocity velocity;
 
     /**
+     * Empty constructor of the Ball class.
+     * The reason why this code is needed is the fact that CHECKSTYLES
+     * won't allow using protected on the class.
+     * This fact lead to a lot of spaghetti code, forcing me to use
+     * getter and setters to mutate fields of the Ball class in its heir: ContainedBall
+     */
+    public Ball() {
+        this.center = new Point(0, 0);
+        this.radius = 0;
+        this.color = new Color(0, 0, 0, 0);
+        this.velocity = new Velocity();
+    }
+    /**
      * Constructor of the Ball class.
      * @param center the center of the Ball
      * @param r the radius of the Ball
@@ -144,5 +157,33 @@ public class Ball {
             this.velocity.setDy(-this.velocity.getDy());
         }
         this.center = this.getVelocity().applyToPoint(this.center);
+    }
+    /**
+     * Getter of the center of the Ball.
+     * @return the center of the Ball
+     */
+    public Point getCenter() {
+        return this.center;
+    }
+    /**
+     * Sets the center of the Ball.
+     * @param newCenter the new center for the Ball
+     */
+    public void setCenter(Point newCenter) {
+        this.center = new Point(newCenter);
+    }
+    /**
+     * Sets the radius of the Ball.
+     * @param radius new radius of the Ball
+     */
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+    /**
+     * Sets the color of the Ball.
+     * @param color new radius of the Ball
+     */
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
