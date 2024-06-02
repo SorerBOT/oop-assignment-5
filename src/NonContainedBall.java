@@ -145,6 +145,7 @@ public class NonContainedBall extends Ball {
             && ThresholdCompare.isThresholdBasedGreaterEqual(650, this.getCenter().getX())
             && ThresholdCompare.isThresholdBasedGreaterEqual(450 + this.getSize(), this.getCenter().getY())
         );
+        
         return (
             isTouchingGreyBottom
             || isTouchingGreyTop
