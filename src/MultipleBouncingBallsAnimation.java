@@ -17,7 +17,7 @@ public class MultipleBouncingBallsAnimation {
         Random random = new Random();
         Ball[] balls = new Ball[sizesArray.length];
         for (int i = 0; i < sizesArray.length; i++) {
-            Ball ball = new Ball(Integer.parseInt(sizesArray[i]), Color.BLACK);
+            Ball ball = new Ball(Integer.parseInt(sizesArray[i]) + 10, Color.BLACK);
             int speed = Math.max(11 - ball.getSize() / 5, 1) / 2;
             // nextDouble(x) returns a number between 0 and x-1, adding 1
             // not using 361 for the sake of simplicity

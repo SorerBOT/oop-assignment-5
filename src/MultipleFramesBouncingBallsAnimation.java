@@ -19,10 +19,11 @@ public class MultipleFramesBouncingBallsAnimation {
         NonContainedBall[] balls = new NonContainedBall[lengthOfNonContainedBalls];
         for (int i = 0; i < lengthOfNonContainedBalls; i++) {
             NonContainedBall ball = new NonContainedBall(
-                Integer.parseInt(sizesArray[i + lengthOfNonContainedBalls]),
+                Integer.parseInt(sizesArray[i + lengthOfNonContainedBalls]) + 5,
                 Color.BLUE
             );
-            int speed = Math.max(11 - ball.getSize() / 5, 1) / 8;
+            // int speed = Math.max(11 - ball.getSize() / 5, 1);
+            int speed = Math.max(120 / ball.getSize() / 8, 2);
             // nextDouble(x) returns a number between 0 and x-1, adding 1
             // not using 361 for the sake of simplicity
             double angle = random.nextDouble(360 + 1);
@@ -44,7 +45,7 @@ public class MultipleFramesBouncingBallsAnimation {
         ContainedBall[] balls = new ContainedBall[lengthOfContainedBalls];
         for (int i = 0; i < lengthOfContainedBalls; i++) {
             ContainedBall ball = new ContainedBall(Integer.parseInt(sizesArray[i]), Color.RED, container);
-            int speed = Math.max(11 - ball.getSize() / 5, 1) / 8;
+            int speed = Math.max(11 - ball.getSize() / 5, 1);
             // nextDouble(x) returns a number between 0 and x-1, adding 1
             // not using 361 for the sake of simplicity
             double angle = random.nextDouble(360 + 1);

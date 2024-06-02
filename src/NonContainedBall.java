@@ -33,6 +33,51 @@ public class NonContainedBall extends Ball {
         return !(touchingGray || touchingYellow || touchingScreen);
     }
     /**
+     * Determines if the x value is valid.
+     * @param x the x value of the Point
+     * @param radius the radius of the Point
+     * @return true if it is valid, false otherwise
+     */
+    public static boolean isGeneratedXValueValid(double x, int radius) {
+        boolean touchingGray = (
+            ThresholdCompare.isThresholdBasedGreaterEqual(x, 50 - radius)
+            && ThresholdCompare.isThresholdBasedGreaterEqual(500 + radius, x)
+        );
+        boolean touchingYellow = (
+            ThresholdCompare.isThresholdBasedGreaterEqual(x, 450 - radius)
+            && ThresholdCompare.isThresholdBasedGreaterEqual(650 + radius, x)
+        );
+        boolean touchingScreen = (
+            ThresholdCompare.isThresholdBasedGreaterEqual(radius, x)
+            || ThresholdCompare.isThresholdBasedGreaterEqual(x, 800 - radius)
+        );
+        return !(touchingGray || touchingYellow || touchingScreen);
+    }
+    /**
+     * Determines if the y value is valid.
+     * @param y the y value
+     * @param radius the radius
+     * @return true if the y value is valid and false otherwise
+     */
+    public static boolean isGeneratedYValueValid(double y, int radius) {
+        boolean touchingGray = (
+            ThresholdCompare.isThresholdBasedGreaterEqual(y, 50 - radius)
+            && ThresholdCompare.isThresholdBasedGreaterEqual(500 + radius, y)
+        );
+
+        boolean touchingYellow = (
+            ThresholdCompare.isThresholdBasedGreaterEqual(y, 450 - radius)
+            && ThresholdCompare.isThresholdBasedGreaterEqual(650 + radius, y)
+        );
+
+        boolean touchingScreen = (
+            ThresholdCompare.isThresholdBasedGreaterEqual(radius, y)
+            || ThresholdCompare.isThresholdBasedGreaterEqual(y, 800 - radius)
+        );
+        return !(touchingGray || touchingYellow || touchingScreen);
+    }
+
+    /**
      * Random Ball constructor.
      * @param r the radius of the Ball
      * @param color the color of the Ball
@@ -145,7 +190,7 @@ public class NonContainedBall extends Ball {
             && ThresholdCompare.isThresholdBasedGreaterEqual(650, this.getCenter().getX())
             && ThresholdCompare.isThresholdBasedGreaterEqual(450 + this.getSize(), this.getCenter().getY())
         );
-        
+
         return (
             isTouchingGreyBottom
             || isTouchingGreyTop
