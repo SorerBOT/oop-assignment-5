@@ -1,3 +1,4 @@
+// Alon Filler 216872374
 /**
  * This class is going to be used as a way of preserving
  * miscellaneous information of the screen.
