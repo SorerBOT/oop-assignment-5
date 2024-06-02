@@ -68,7 +68,22 @@ public class Ball {
      */
     public Ball(int r, Color color) {
         Random random = new Random();
-        this.center = new Point(random.nextInt(Screen.WIDTH + 1), random.nextInt(Screen.HEIGHT + 1));
+        boolean found = false;
+        double x = 0, y = 0;
+        while (!found) {
+            x = random.nextInt(Screen.WIDTH + 1);
+            y = random.nextInt(Screen.HEIGHT + 1);
+            boolean isTouchingScreen = (
+                ThresholdCompare.isThresholdBasedGreaterEqual(this.radius, x)
+                && ThresholdCompare.isThresholdBasedGreaterEqual(this.radius, y)
+                && ThresholdCompare.isThresholdBasedGreaterEqual(x, Screen.WIDTH - this.radius)
+                && ThresholdCompare.isThresholdBasedGreaterEqual(y, Screen.HEIGHT - this.radius)
+            );
+            if (!isTouchingScreen) {
+                this.center = new Point(x, y);
+                found = true;
+            }
+        }
         this.radius = r;
         this.color = color;
         this.velocity = new Velocity();
