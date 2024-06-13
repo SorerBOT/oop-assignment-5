@@ -329,6 +329,60 @@ public class Line {
         // Under the pretention that the laws compelled by the axioms
         // of geometry apply here, there can be no more than two distinct Points of intersection.
         if (intersectionPoints.isEmpty()) {
+            // Checking whether the Rectangle collides with the Line.
+            // If such is the case, proceeds to calculate the coordinates of the Point and returns it.
+            if (this.isLineColliding(rect.getLeftSide())) {
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                    rect.getUpperLeft().getY(), this.start.getY()
+                )) {
+                    return rect.getUpperLeft();
+                }
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                   this.start.getY(), rect.getBottomLeft().getY()
+                )) {
+                    return rect.getBottomLeft();
+                }
+                return new Point(this.start);
+            }
+            if (this.isLineColliding(rect.getRightSide())) {
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                    rect.getUpperRight().getY(), this.start.getY()
+                )) {
+                    return rect.getUpperRight();
+                }
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                   this.start.getY(), rect.getBottomRight().getY()
+                )) {
+                    return rect.getBottomRight();
+                }
+                return new Point(this.start);
+            }
+            if (this.isLineColliding(rect.getTopSide())) {
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                    rect.getUpperLeft().getX(), this.start.getX()
+                )) {
+                    return rect.getUpperLeft();
+                }
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                   this.start.getX(), rect.getUpperRight().getX()
+                )) {
+                    return rect.getUpperRight();
+                }
+                return new Point(this.start);
+            }
+            if (this.isLineColliding(rect.getBottomSide())) {
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                    rect.getBottomLeft().getX(), this.start.getX()
+                )) {
+                    return rect.getBottomLeft();
+                }
+                if (ThresholdCompare.isThresholdBasedGreaterEqual(
+                   this.start.getX(), rect.getBottomRight().getX()
+                )) {
+                    return rect.getBottomRight();
+                }
+                return new Point(this.start);
+            }
             return null;
         }
         firstIntersection = intersectionPoints.get(0);
