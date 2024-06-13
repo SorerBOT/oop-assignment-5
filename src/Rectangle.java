@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  * The Rectangle class.
  */
@@ -28,12 +29,14 @@ public class Rectangle {
      * @return a possibly empty list of intersection Points
      */
     public java.util.List<Point> intersectionPoints(Line line) {
-        java.util.List<Point> list = new java.util.ArrayList<Point>();
+        ArrayList<Point> list = new ArrayList<Point>();
 
         Line leftSide = new Line(this.upperLeft, this.bottomLeft);
         Line rightSide = new Line(this.upperRight, this.bottomRight);
         Line topSide = new Line(this.upperLeft, this.upperRight);
         Line bottomSide = new Line(this.bottomLeft, this.bottomRight);
+
+        Point p1, p2, p3, p4;
 
         if (
             line.isLineColliding(leftSide)
@@ -44,11 +47,11 @@ public class Rectangle {
             return null;
         }
 
-        Point p1, p2, p3, p4;
         p1 = leftSide.intersectionWith(line);
         p2 = rightSide.intersectionWith(line);
         p3 = topSide.intersectionWith(line);
         p4 = bottomSide.intersectionWith(line);
+
         if (p1 != null) {
             list.add(p1);
         }
@@ -56,10 +59,14 @@ public class Rectangle {
             list.add(p2);
         }
         if (p3 != null) {
-            list.add(p3);
+            if (!p3.equals(p1) && !p3.equals(p2)) {
+                list.add(p3);
+            }
         }
         if (p4 != null) {
-            list.add(p4);
+            if (!p4.equals(p1) && !p4.equals(p2)) {
+                list.add(p4);
+            }
         }
         return list;
     }

@@ -1,4 +1,7 @@
 // Alon Filler 216872374
+
+import java.util.List;
+
 /**
  * Forced to create this JDOC due to checkstyles.
  */
@@ -313,5 +316,29 @@ public class Line {
             (this.start.equals(other.start()) && this.end.equals(other.end()))
             || (this.start.equals(other.end()) && this.end.equals(other.start()))
         );
+    }
+    /**
+     * Finds the closet intersection Point between the Line and a Rectangle.
+     * @param rect the Rectangle
+     * @return the closet intersection Point between the Line and the Rectangle (if such Point does not exist, null)
+     */
+    public Point closestIntersectionToStartOfLine(Rectangle rect) {
+        boolean isFirstIntersectionCloset;
+        Point firstIntersection, secondIntersection;
+        List<Point> intersectionPoints = rect.intersectionPoints(this);
+        // Under the pretention that the laws compelled by the axioms
+        // of geometry apply here, there can be no more than two distinct Points of intersection.
+        if (intersectionPoints.isEmpty()) {
+            return null;
+        }
+        firstIntersection = intersectionPoints.get(0);
+        if (intersectionPoints.size() == 1) {
+            return new Point(firstIntersection);
+        }
+
+        //Now we know there are two intersection points/.
+        secondIntersection = intersectionPoints.get(1);
+        isFirstIntersectionCloset = firstIntersection.distance(this.start) <= secondIntersection.distance(this.start);
+        return isFirstIntersectionCloset ? new Point(firstIntersection) : new Point(secondIntersection);
     }
 }
