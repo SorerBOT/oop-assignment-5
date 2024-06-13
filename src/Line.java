@@ -331,6 +331,13 @@ public class Line {
         if (intersectionPoints.isEmpty()) {
             // Checking whether the Rectangle collides with the Line.
             // If such is the case, proceeds to calculate the coordinates of the Point and returns it.
+            // The process under which the coordinates are procured consists of the following steps:
+            //  * Check for collision between a side of the rectangle and the line
+            //  * If they collide, proceed to the next steps
+            //  * It is now established that the line collides with the side of the rectangle
+            //    thus, it is now possible to announce that the closest point
+            //    is either the starting point in and of itself, or the edges of the side of the rectangle
+            //    using a simple comparison between their coordinates we can reach certainty in this regard
             if (this.isLineColliding(rect.getLeftSide())) {
                 if (ThresholdCompare.isThresholdBasedGreaterEqual(
                     rect.getUpperLeft().getY(), this.start.getY()
