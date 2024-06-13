@@ -49,16 +49,16 @@ public class Rectangle {
         p2 = rightSide.intersectionWith(line);
         p3 = topSide.intersectionWith(line);
         p4 = bottomSide.intersectionWith(line);
-        if (p1 == null) {
+        if (p1 != null) {
             list.add(p1);
         }
-        if (p2 == null) {
+        if (p2 != null) {
             list.add(p2);
         }
-        if (p3 == null) {
+        if (p3 != null) {
             list.add(p3);
         }
-        if (p4 == null) {
+        if (p4 != null) {
             list.add(p4);
         }
         return list;
