@@ -34,6 +34,14 @@ public class Line {
         return this.start.equals(this.end);
     }
     /**
+     * Determines whether the Line collides with the other Line.
+     * @param line the other Line
+     * @return true if the Lines collide and false otherwise
+     */
+    public boolean isLineColliding(Line line) {
+        return this.isIntersecting(line) && this.intersectionWith(line) == null;
+    }
+    /**
      * Can only be used under the assumption that the Line is not perpendicular to the main axis.
      * if such is not the case an error must be thrown
      * @return the slope of the Line if it can be procured by this method of calculation.
@@ -97,6 +105,13 @@ public class Line {
      */
     public boolean isPerpendicularToMainAxis() {
         return ThresholdCompare.isThresholdBasedEquals(this.start.getX(), this.end.getX());
+    }
+    /**
+     * Determines whether the Line Segment is horizontal.
+     * @return true if the Line Segment is horizontal and false otherwise
+     */
+    public boolean isHorizontal() {
+        return ThresholdCompare.isThresholdBasedEquals(this.start.getY(), this.end.getY());
     }
     /**
      * @return the end Point of the Line
