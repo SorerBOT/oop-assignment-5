@@ -336,9 +336,11 @@ public class Line {
             return new Point(firstIntersection);
         }
 
-        //Now we know there are two intersection points/.
+        // We have by now established that there are two distinct Points of intersection
         secondIntersection = intersectionPoints.get(1);
         isFirstIntersectionCloset = firstIntersection.distance(this.start) <= secondIntersection.distance(this.start);
-        return isFirstIntersectionCloset ? new Point(firstIntersection) : new Point(secondIntersection);
+        return isFirstIntersectionCloset
+            ? new Point(firstIntersection)
+            : new Point(secondIntersection);
     }
 }
