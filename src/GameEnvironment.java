@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.ArrayList;
 /**
  * GameEnvironment class.
@@ -31,4 +30,5 @@ public class GameEnvironment {
     public CollisionInfo getClosestCollision(Line trajectory) {
         return null;
     }
+
 }

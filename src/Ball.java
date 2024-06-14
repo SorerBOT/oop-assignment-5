@@ -162,11 +162,18 @@ public class Ball {
         this.velocity = new Velocity(dx, dy);
     }
     /**
-     * Returns the Velocity object of the Ball.
-     * @return the velocity object of the Ball
+     * Getter of the center of the Ball.
+     * @return the center of the Ball
      */
-    public Velocity getVelocity() {
-        return new Velocity(this.velocity);
+    public Point getCenter() {
+        return this.center;
+    }
+    /**
+     * Sets the center of the Ball.
+     * @param newCenter the new center for the Ball
+     */
+    public void setCenter(Point newCenter) {
+        this.center = new Point(newCenter);
     }
     /**
      * moves the center Point one step.
@@ -184,20 +191,16 @@ public class Ball {
         ) {
             this.velocity.setDy(-this.velocity.getDy());
         }
-        this.center = this.getVelocity().applyToPoint(this.center);
+        this.center = this.velocity.applyToPoint(this.center);
     }
     /**
-     * Getter of the center of the Ball.
-     * @return the center of the Ball
+     * Computes the trajectory of the Ball.
+     * @return a Line drawn between the centre of the Ball and its position subsequent to the next movement.
      */
-    public Point getCenter() {
-        return this.center;
-    }
-    /**
-     * Sets the center of the Ball.
-     * @param newCenter the new center for the Ball
-     */
-    public void setCenter(Point newCenter) {
-        this.center = new Point(newCenter);
+    public Line getTrajectory() {
+        return new Line(
+            this.center,
+            this.velocity.applyToPoint(this.center)
+        );
     }
 }
