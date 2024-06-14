@@ -18,8 +18,9 @@ public class Ball {
      * @param center the center of the Ball
      * @param r the radius of the Ball
      * @param color the color of the Ball
+     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(Point center, int r, Color color) {
+    public Ball(Point center, int r, Color color, GameEnvironment gameEnvironment) {
         this.center = new Point(center);
         this.radius = r;
         this.color = new Color(
@@ -29,7 +30,7 @@ public class Ball {
             color.getAlpha()
         );
         this.velocity = new Velocity();
-        this.gameEnvironment = null;
+        this.gameEnvironment = gameEnvironment;
     }
     /**
      * Empty constructor of the Ball class.
@@ -42,7 +43,8 @@ public class Ball {
         this(
             new Point(0, 0),
             0,
-            new Color(0, 0, 0, 0)
+            new Color(0, 0, 0, 0),
+            null
         );
     }
     /**
@@ -51,9 +53,10 @@ public class Ball {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
+     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(double x, double y, int r, Color color) {
-        this((int) x, (int) y, r, color);
+    public Ball(double x, double y, int r, Color color, GameEnvironment gameEnvironment) {
+        this((int) x, (int) y, r, color, gameEnvironment);
     }
     /**
      * Constructs a Point then a Ball utilising it.
@@ -62,16 +65,18 @@ public class Ball {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
+     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(int x, int y, int r, Color color) {
-        this(new Point(x, y), r, color);
+    public Ball(int x, int y, int r, Color color, GameEnvironment gameEnvironment) {
+        this(new Point(x, y), r, color, gameEnvironment);
     }
     /**
      * Random Ball constructor.
      * @param r the radius of the Ball
      * @param color the color of the Ball
+     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(int r, Color color) {
+    public Ball(int r, Color color, GameEnvironment gameEnvironment) {
         Random random = new Random();
         boolean found = false;
         double x = 0, y = 0;
@@ -79,7 +84,7 @@ public class Ball {
         this.radius = r;
         this.color = color;
         this.velocity = new Velocity();
-        this.gameEnvironment = null;
+        this.gameEnvironment = gameEnvironment;
 
         while (!found) {
             x = random.nextInt(Screen.WIDTH + 1);
