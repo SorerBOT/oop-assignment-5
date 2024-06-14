@@ -14,4 +14,16 @@ public interface Collidable {
      * @return the new Velocity of the hitting object
      */
     Velocity hit(Point collisionPoint, Velocity currentVelocity);
+    /**
+     * Determines if there is a horizontal collision.
+     * @param collisionPoint the Point suspected of collision
+     * @return true if there is a collision and false otherwise
+     */
+    boolean isCollidingHorizontally(Point collisionPoint);
+    /**
+     * Determines if there is a horizontal collision.
+     * @param collisionPoint the Point suspected of collision
+     * @return true if there is a collision and false otherwise
+     */
+    boolean isCollidingVertically(Point collisionPoint);
 }

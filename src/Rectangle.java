@@ -18,6 +18,13 @@ public class Rectangle {
         this.height = height;
     }
     /**
+     * Copy constructor of the Rectangle class.
+     * @param rectangle the Rectangle to be copied
+     */
+    public Rectangle(Rectangle rectangle) {
+        this(rectangle.getUpperLeft(), rectangle.getWidth(), rectangle.getHeight());
+    }
+    /**
      * Return a (possibly empty) List of intersection points with the specified Line.
      * @param line the Line for which we must find intersection Points
      * @return a possibly empty list of intersection Points
