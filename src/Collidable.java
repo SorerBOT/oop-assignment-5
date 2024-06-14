@@ -26,4 +26,9 @@ public interface Collidable {
      * @return true if there is a collision and false otherwise
      */
     boolean isCollidingVertically(Point collisionPoint);
+    /**
+     * The method clones the Collidable object, similarlyj to a copy constructor.
+     * @return a copy of the Collidable object
+     */
+    Collidable cloneDeep();
 }

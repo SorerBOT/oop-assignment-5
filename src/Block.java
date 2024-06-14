@@ -1,6 +1,3 @@
-import java.awt.Color;
-import biuoop.DrawSurface;
-
 /**
  * The Block class.
  */
@@ -47,5 +44,9 @@ public class Block implements Collidable {
                 || ThresholdCompare.isThresholdBasedEquals(this.shape.getBottomLeft().getY(), collisionPoint.getY())
             )
         );
+    }
+    @Override
+    public Block cloneDeep() {
+        return new Block(this.shape);
     }
 }

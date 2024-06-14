@@ -7,23 +7,12 @@ import biuoop.DrawSurface;
  */
 public class Ball {
     private Point center;
-    private int radius;
-    private Color color;
     private Velocity velocity;
 
-    /**
-     * Empty constructor of the Ball class.
-     * The reason why this code is needed is the fact that CHECKSTYLES
-     * won't allow using protected on the class.
-     * This fact lead to a lot of spaghetti code, forcing me to use
-     * getter and setters to mutate fields of the Ball class in its heir: ContainedBall
-     */
-    public Ball() {
-        this.center = new Point(0, 0);
-        this.radius = 0;
-        this.color = new Color(0, 0, 0, 0);
-        this.velocity = new Velocity();
-    }
+    private final GameEnvironment gameEnvironment;
+    private final int radius;
+    private final Color color;
+
     /**
      * Constructor of the Ball class.
      * @param center the center of the Ball
@@ -40,6 +29,21 @@ public class Ball {
             color.getAlpha()
         );
         this.velocity = new Velocity();
+        this.gameEnvironment = null;
+    }
+    /**
+     * Empty constructor of the Ball class.
+     * The reason why this code is needed is the fact that CHECKSTYLES
+     * won't allow using protected on the class.
+     * This fact lead to a lot of spaghetti code, forcing me to use
+     * getter and setters to mutate fields of the Ball class in its heir: ContainedBall
+     */
+    public Ball() {
+        this(
+            new Point(0, 0),
+            0,
+            new Color(0, 0, 0, 0)
+        );
     }
     /**
      * Constructor of the Ball class.
@@ -71,6 +75,12 @@ public class Ball {
         Random random = new Random();
         boolean found = false;
         double x = 0, y = 0;
+
+        this.radius = r;
+        this.color = color;
+        this.velocity = new Velocity();
+        this.gameEnvironment = null;
+
         while (!found) {
             x = random.nextInt(Screen.WIDTH + 1);
             y = random.nextInt(Screen.HEIGHT + 1);
@@ -85,9 +95,6 @@ public class Ball {
                 found = true;
             }
         }
-        this.radius = r;
-        this.color = color;
-        this.velocity = new Velocity();
     }
     /**
      * Returns the X value of the center Point.
@@ -187,19 +194,5 @@ public class Ball {
      */
     public void setCenter(Point newCenter) {
         this.center = new Point(newCenter);
-    }
-    /**
-     * Sets the radius of the Ball.
-     * @param radius new radius of the Ball
-     */
-    public void setRadius(int radius) {
-        this.radius = radius;
-    }
-    /**
-     * Sets the color of the Ball.
-     * @param color new radius of the Ball
-     */
-    public void setColor(Color color) {
-        this.color = color;
     }
 }
