@@ -329,67 +329,6 @@ public class Line {
         // Under the pretention that the laws compelled by the axioms
         // of geometry apply here, there can be no more than two distinct Points of intersection.
         if (intersectionPoints.isEmpty()) {
-            // Checking whether the Rectangle collides with the Line.
-            // If such is the case, proceeds to calculate the coordinates of the Point and returns it.
-            // The process under which the coordinates are procured consists of the following steps:
-            //  * Check for collision between a side of the rectangle and the line
-            //  * If they collide, proceed to the next steps
-            //  * It is now established that the line collides with the side of the rectangle
-            //    thus, it is now possible to announce that the closest point
-            //    is either the starting point in and of itself, or the edges of the side of the rectangle
-            //    using a simple comparison between their coordinates we can reach certainty in this regard
-            if (this.isLineColliding(rect.getLeftSide())) {
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                    rect.getUpperLeft().getY(), this.start.getY()
-                )) {
-                    return rect.getUpperLeft();
-                }
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                   this.start.getY(), rect.getBottomLeft().getY()
-                )) {
-                    return rect.getBottomLeft();
-                }
-                return new Point(this.start);
-            }
-            if (this.isLineColliding(rect.getRightSide())) {
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                    rect.getUpperRight().getY(), this.start.getY()
-                )) {
-                    return rect.getUpperRight();
-                }
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                   this.start.getY(), rect.getBottomRight().getY()
-                )) {
-                    return rect.getBottomRight();
-                }
-                return new Point(this.start);
-            }
-            if (this.isLineColliding(rect.getTopSide())) {
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                    rect.getUpperLeft().getX(), this.start.getX()
-                )) {
-                    return rect.getUpperLeft();
-                }
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                   this.start.getX(), rect.getUpperRight().getX()
-                )) {
-                    return rect.getUpperRight();
-                }
-                return new Point(this.start);
-            }
-            if (this.isLineColliding(rect.getBottomSide())) {
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                    rect.getBottomLeft().getX(), this.start.getX()
-                )) {
-                    return rect.getBottomLeft();
-                }
-                if (ThresholdCompare.isThresholdBasedGreaterEqual(
-                   this.start.getX(), rect.getBottomRight().getX()
-                )) {
-                    return rect.getBottomRight();
-                }
-                return new Point(this.start);
-            }
             return null;
         }
         firstIntersection = intersectionPoints.get(0);
