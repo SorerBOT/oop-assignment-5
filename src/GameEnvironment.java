@@ -28,7 +28,26 @@ public class GameEnvironment {
      * @return CollisionInfo of the closest collision if there is any, null otherwise
      */
     public CollisionInfo getClosestCollision(Line trajectory) {
-        return null;
-    }
+        CollisionInfo closestCollisionInfo = null;
 
+        for (Collidable collidable : this.collidables) {
+            Point collisionPoint = trajectory.closestIntersectionToStartOfLine(collidable.getCollisionRectangle());
+            if (collisionPoint == null) {
+                continue;
+            }
+            if (closestCollisionInfo == null) {
+                closestCollisionInfo = new CollisionInfo(collisionPoint, collidable);
+                continue;
+            } else {
+                double currentDistance = trajectory.start().distance(collisionPoint);
+                double minDistance = trajectory.start().distance(closestCollisionInfo.collisionPoint());
+
+                if (currentDistance < minDistance) {
+                    closestCollisionInfo = new CollisionInfo(collisionPoint, collidable);
+                }
+            }
+        }
+
+        return closestCollisionInfo;
+    }
 }
