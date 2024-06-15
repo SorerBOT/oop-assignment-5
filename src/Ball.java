@@ -5,7 +5,7 @@ import biuoop.DrawSurface;
 /**
  * Forced to create this JDOC due to checkstyles.
  */
-public class Ball {
+public class Ball implements Sprite {
     private Point center;
     private Velocity velocity;
 
@@ -135,18 +135,6 @@ public class Ball {
         );
     }
     /**
-     * Draws the Ball on the surface.
-     * @param surface the surface on which the Ball must be drawn
-     */
-    public void drawOn(DrawSurface surface) {
-        surface.setColor(this.color);
-        surface.fillCircle(
-            this.getX(),
-            this.getY(),
-            this.radius
-        );
-    }
-    /**
      * Changes the Velocity of the Ball.
      * @param v the new Velocity of the Ball
      */
@@ -203,5 +191,18 @@ public class Ball {
             this.center,
             this.velocity.applyToPoint(this.center)
         );
+    }
+    @Override
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(this.color);
+        surface.fillCircle(
+            this.getX(),
+            this.getY(),
+            this.radius
+        );
+    }
+    @Override
+    public void timePassed() {
+        this.moveOneStep();
     }
 }

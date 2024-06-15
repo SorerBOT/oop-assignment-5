@@ -10,7 +10,6 @@ public class Game {
     //private final SpriteCollection spriteCollection;
     private final GameEnvironment gameEnvironment;
     private final GUI gui;
-    //private Paddle paddle;
 
     /**
      * Empty constructor.
@@ -20,7 +19,6 @@ public class Game {
         this.gameEnvironment = new GameEnvironment();
         this.gui = new GUI("Oop-assignment-3", Screen.WIDTH, Screen.HEIGHT);
         //this.spriteCollection = null;
-        //this.paddle = null;
     }
 
     /**
@@ -51,12 +49,12 @@ public class Game {
      * Adds a Sprite to the SpriteCollection.
      * @param s the Sprite to be added.
      */
-    //public void addSprite(Sprite s) {
-    //    this.spriteCollection.addSprite(s);
-    //}
+    public void addSprite(Sprite s) {
+        //this.spriteCollection.addSprite(s);
+    }
 
     /**
-     * Initialises the Game by generating:
+     * Initializes the Game by generating:
      * Blocks, a Ball and a Paddle proceeds to add them to the Game.
      */
     public void initialize() {
@@ -65,22 +63,15 @@ public class Game {
         //this.addSprite(ball);
         //Paddle paddle = new Paddle();
         //this.paddle = paddle;
-        Block topFrame = new Block(new Rectangle(new Point(0, -50), 800, 50));
-        Block bottomFrame = new Block(new Rectangle(new Point(0, 600), 800, 50));
-        Block leftFrame = new Block(new Rectangle(new Point(-50, 0), 50, 600));
-        Block rightFrame = new Block(new Rectangle(new Point(800, 0), 50, 600));
+        Block topFrame = new Block(new Rectangle(new Point(0, -50), 800, 50), Color.BLACK);
+        Block bottomFrame = new Block(new Rectangle(new Point(0, 600), 800, 50), Color.BLACK);
+        Block leftFrame = new Block(new Rectangle(new Point(-50, 0), 50, 600), Color.BLACK);
+        Block rightFrame = new Block(new Rectangle(new Point(800, 0), 50, 600), Color.BLACK);
 
-        //this.addSprite(topFrame);
-        this.addCollidable(topFrame);
-
-        //this.addSprite(bottomFrame);
-        this.addCollidable(bottomFrame);
-
-        //this.addSprite(leftFrame);
-        this.addCollidable(leftFrame);
-
-        //this.addSprite(rightFrame);
-        this.addCollidable(rightFrame);
+        topFrame.addToGame(this);
+        bottomFrame.addToGame(this);
+        leftFrame.addToGame(this);
+        rightFrame.addToGame(this);
     }
 
     /**
