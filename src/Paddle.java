@@ -46,7 +46,32 @@ public class Paddle implements Sprite, Collidable {
         }
         shape.setUpperLeftXValue(shape.getUpperLeft().getX() + 8);
     }
+    /**
+     * Determines the region in which the collision.
+     * @param collisionPoint The Point of collision
+     * @return The number of the region in which the Point of collision resides
+     */
+    public int getRegionOfCollision(Point collisionPoint) {
+        final double upperLeftXValue = this.shape.getUpperLeft().getX();
+        final double paddleWidth = this.shape.getWidth();
+        final double regionLength = 0.2 * paddleWidth;
 
+        for (int regionNumber = 1; regionNumber < 5; regionNumber++) {
+            if (collisionPoint.getX() < upperLeftXValue + regionNumber * regionLength) {
+                return regionNumber;
+            }
+        }
+        return 5;
+    }
+    /**
+     * Adds Paddle to the Game.
+     * @param g the Game to which the Paddle is ought to be added
+     */
+    public void addToGame(Game g) {
+        g.addSprite(this);
+        g.addCollidable(this);
+        this.keyboard = g.getGui().getKeyboardSensor();
+    }
     @Override
     // Responsible for the movement of the Paddle.
     public void timePassed() {
@@ -98,32 +123,5 @@ public class Paddle implements Sprite, Collidable {
         // for each increase in the zone's number, add 30 degrees, starting from 60
         projectionAngle = 60 - (region - 1) * 30;
         return Velocity.fromAngleAndSpeed(projectionAngle, currentSpeed);
-    }
-
-    /**
-     * Determines the region in which the collision.
-     * @param collisionPoint The Point of collision
-     * @return The number of the region in which the Point of collision resides
-     */
-    public int getRegionOfCollision(Point collisionPoint) {
-        final double upperLeftXValue = this.shape.getUpperLeft().getX();
-        final double paddleWidth = this.shape.getWidth();
-        final double regionLength = 0.2 * paddleWidth;
-
-        for (int regionNumber = 1; regionNumber < 5; regionNumber++) {
-            if (collisionPoint.getX() < upperLeftXValue + regionNumber * regionLength) {
-                return regionNumber;
-            }
-        }
-        return 5;
-    }
-    /**
-     * Adds Paddle to the Game.
-     * @param g the Game to which the Paddle is ought to be added
-     */
-    public void addToGame(Game g) {
-        g.addSprite(this);
-        g.addCollidable(this);
-        this.keyboard = g.getGui().getKeyboardSensor();
     }
 }
