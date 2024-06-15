@@ -179,19 +179,20 @@ public class Ball {
      * moves the center Point one step.
      */
     public void moveOneStep() {
-        if (
-            ThresholdCompare.isThresholdBasedGreaterEqual(this.radius, this.center.getX())
-            || ThresholdCompare.isThresholdBasedGreaterEqual(this.center.getX(), Screen.WIDTH - this.radius)
-        ) {
-            this.velocity.setDx(-this.velocity.getDx());
+        final double proximityToCollision = 0.9;
+        Line trajectory = new Line(this.center, this.velocity.applyToPoint(this.center));
+        CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
+
+        if (collisionInfo == null) {
+            this.center = this.velocity.applyToPoint(this.center);
+            return;
         }
-        if (
-            ThresholdCompare.isThresholdBasedGreaterEqual(this.radius, this.center.getY())
-            || ThresholdCompare.isThresholdBasedGreaterEqual(this.center.getY(), Screen.HEIGHT - this.radius)
-        ) {
-            this.velocity.setDy(-this.velocity.getDy());
-        }
-        this.center = this.velocity.applyToPoint(this.center);
+
+        Collidable collision = collisionInfo.collisionObject();
+        Point point = collisionInfo.collisionPoint();
+        this.center = this.velocity.moveNearCollision(this.center, point, proximityToCollision);
+
+        this.velocity = collision.hit(point, this.velocity);
     }
     /**
      * Computes the trajectory of the Ball.

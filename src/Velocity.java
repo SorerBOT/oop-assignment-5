@@ -86,4 +86,17 @@ public class Velocity {
             p.getY() + this.dy
         );
     }
+    /**
+     * Procures a Point that is near the Point of collision between
+     * between the Ball and the GameEnvironment collidables.
+     * @param center the current center of the Ball
+     * @param collision
+     * @param changeParam
+     * @return the new Point
+     */
+    public Point moveNearCollision(Point center, Point collision, double changeParam) {
+        double newX = center.getX() + (collision.getX() - center.getX()) * changeParam;
+        double newY = center.getY() + (collision.getY() - center.getY()) * changeParam;
+        return new Point(newX, newY);
+    }
 }
