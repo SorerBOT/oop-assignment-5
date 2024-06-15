@@ -1,93 +1,137 @@
+import java.awt.Color;
 import biuoop.GUI;
 import biuoop.DrawSurface;
 import biuoop.Sleeper;
-import java.awt.Color;
-
 /**
  * The Game class.
  */
 public class Game {
-    //private final SpriteCollection spriteCollection;
+    private final SpriteCollection sprites;
     private final GameEnvironment gameEnvironment;
     private final GUI gui;
-
+    private Paddle paddle;
     /**
-     * Empty constructor.
+     * Empty constructor of the Game class.
      */
     public Game() {
-        //sprites = new SpriteCollection();
+        this.sprites = new SpriteCollection();
         this.gameEnvironment = new GameEnvironment();
-        this.gui = new GUI("Oop-assignment-3", Screen.WIDTH, Screen.HEIGHT);
-        //this.spriteCollection = null;
+        this.gui = new GUI("Gaming", Screen.WIDTH, Screen.HEIGHT);
     }
-
     /**
      * Getter of the gameEnvironment field.
-     * @return The GameEnvironment field
+     * @return the GameEnvironment of the Game
      */
     public GameEnvironment getEnvironment() {
         return this.gameEnvironment;
     }
-
     /**
-     * Getter of the GUI field.
-     * @return The GUI field
+     * Getter of the gui field.
+     * @return the GUI of the Game
      */
     public GUI getGui() {
-        return gui;
+        return this.gui;
     }
-
+    /**
+     * Getter of the paddle field.
+     * @return the Paddle of the game
+     */
+    public Paddle getPaddle() {
+        return this.paddle;
+    }
     /**
      * Adds a Collidable to the GameEnvironment.
-     * @param c The Collidable we add
+     * @param c the Collidable to be added
      */
     public void addCollidable(Collidable c) {
         this.gameEnvironment.addCollidable(c);
     }
-
     /**
      * Adds a Sprite to the SpriteCollection.
      * @param s the Sprite to be added.
      */
     public void addSprite(Sprite s) {
-        //this.spriteCollection.addSprite(s);
+        sprites.addSprite(s);
+    }
+    /**
+     * This method initializes the game by generating:
+        * The Ball
+        * The Blocks
+        * The Paddle
+     * then adds them to the Game.
+     */
+    public void initialize() {
+        Ball firstBall = new Ball(new Point(500, 400), 8, Color.WHITE);
+        Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
+
+        firstBall.setVelocity(2, 3);
+        secondBall.setVelocity(2, 3);
+        firstBall.addToGame(this);
+        secondBall.addToGame(this);
+
+        this.paddle = new Paddle(Color.YELLOW);
+        paddle.addToGame(this);
+
+        this.addAllBlocks();
     }
 
     /**
-     * Initializes the Game by generating:
-     * Blocks, a Ball and a Paddle proceeds to add them to the Game.
+     * Generates and adds all the blocks required for the Game.
      */
-    public void initialize() {
-        Ball ball = new Ball(new Point(500, 100), 10, Color.BLACK, this.gameEnvironment);
-        ball.setVelocity(2, 3);
-        //this.addSprite(ball);
-        //Paddle paddle = new Paddle();
-        //this.paddle = paddle;
-        Block topFrame = new Block(new Rectangle(new Point(0, -50), 800, 50), Color.BLACK);
-        Block bottomFrame = new Block(new Rectangle(new Point(0, 600), 800, 50), Color.BLACK);
-        Block leftFrame = new Block(new Rectangle(new Point(-50, 0), 50, 600), Color.BLACK);
-        Block rightFrame = new Block(new Rectangle(new Point(800, 0), 50, 600), Color.BLACK);
+    public void addAllBlocks() {
+        Rectangle topFrameRectangle = new Rectangle(new Point(0, -50), 800, 50);
+        Rectangle bottomFrameRectangle = new Rectangle(new Point(0, 600), 800, 50);
+        Rectangle leftFrameRectangle = new Rectangle(new Point(-50, 0), 50, 600);
+        Rectangle rightFrameRectangle = new Rectangle(new Point(800, 0), 50, 600);
+
+        Block topFrame = new Block(topFrameRectangle);
+        Block bottomFrame = new Block(bottomFrameRectangle);
+        Block leftFrame = new Block(leftFrameRectangle);
+        Block rightFrame = new Block(rightFrameRectangle);
 
         topFrame.addToGame(this);
         bottomFrame.addToGame(this);
         leftFrame.addToGame(this);
         rightFrame.addToGame(this);
+
+        addRowBlocks(12, 80, Color.GRAY);
+        addRowBlocks(11, 110, Color.RED);
+        addRowBlocks(10, 140, Color.YELLOW);
+        addRowBlocks(9, 170, Color.BLUE);
+        addRowBlocks(8, 200, Color.PINK);
+        addRowBlocks(7, 230, Color.GREEN);
     }
 
     /**
-     * This method runs the game -- starts the animation loop.
+     * Generates and adds a row of Blocks to the Game.
+     * @param amountOfBlocks the number of Blocks to be generated and added
+     * @param rowYValue the y value of the row
+     * @param color the Color of the blocks
+     */
+    public void addRowBlocks(int amountOfBlocks, double rowYValue, Color color) {
+        for (int i = 0; i < amountOfBlocks; i++) {
+            Rectangle rectangle = new Rectangle(new Point(740 - 60 * i, rowYValue), 60, 30);
+            Block block = new Block(rectangle, color);
+            block.addToGame(this);
+        }
+    }
+
+    /**
+     * Runs the Game by starting the animation loop.
      */
     public void run() {
-        final int fps = 60;
-        final int millisecondsPerFrame = 1000 / fps;
+        final int framesPerSecond = 60;
+        final int millisecondsPerFrame = 1000 / framesPerSecond;
         Sleeper sleeper = new Sleeper();
         while (true) {
             long startTime = System.currentTimeMillis(); //Timing
 
             DrawSurface d = gui.getDrawSurface();
-            //this.sprites.drawAllOn(d);
+            d.setColor(new Color(1, 1, 122));
+            d.fillRectangle(0, 0, 800, 600);
+            this.sprites.drawAllOn(d);
             gui.show(d);
-            //this.sprites.notifyAllTimePassed();
+            this.sprites.notifyAllTimePassed();
 
             //Timing
             long usedTime = System.currentTimeMillis() - startTime;
@@ -97,4 +141,6 @@ public class Game {
             }
         }
     }
+
+
 }

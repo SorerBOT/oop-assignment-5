@@ -9,7 +9,8 @@ public class Ball implements Sprite {
     private Point center;
     private Velocity velocity;
 
-    private final GameEnvironment gameEnvironment;
+    private GameEnvironment gameEnvironment;
+    private Paddle paddle;
     private final int radius;
     private final Color color;
 
@@ -18,9 +19,8 @@ public class Ball implements Sprite {
      * @param center the center of the Ball
      * @param r the radius of the Ball
      * @param color the color of the Ball
-     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(Point center, int r, Color color, GameEnvironment gameEnvironment) {
+    public Ball(Point center, int r, Color color) {
         this.center = new Point(center);
         this.radius = r;
         this.color = new Color(
@@ -30,7 +30,8 @@ public class Ball implements Sprite {
             color.getAlpha()
         );
         this.velocity = new Velocity();
-        this.gameEnvironment = gameEnvironment;
+        this.gameEnvironment = null;
+        this.paddle = null;
     }
     /**
      * Empty constructor of the Ball class.
@@ -43,8 +44,7 @@ public class Ball implements Sprite {
         this(
             new Point(0, 0),
             0,
-            new Color(0, 0, 0, 0),
-            null
+            new Color(0, 0, 0, 0)
         );
     }
     /**
@@ -53,10 +53,9 @@ public class Ball implements Sprite {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
-     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(double x, double y, int r, Color color, GameEnvironment gameEnvironment) {
-        this((int) x, (int) y, r, color, gameEnvironment);
+    public Ball(double x, double y, int r, Color color) {
+        this((int) x, (int) y, r, color);
     }
     /**
      * Constructs a Point then a Ball utilising it.
@@ -65,18 +64,16 @@ public class Ball implements Sprite {
      * @param y the Y value of the Point
      * @param r the radius value of the Ball
      * @param color the color of the Ball
-     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(int x, int y, int r, Color color, GameEnvironment gameEnvironment) {
-        this(new Point(x, y), r, color, gameEnvironment);
+    public Ball(int x, int y, int r, Color color) {
+        this(new Point(x, y), r, color);
     }
     /**
      * Random Ball constructor.
      * @param r the radius of the Ball
      * @param color the color of the Ball
-     * @param gameEnvironment a referece to the GameEnvironment
      */
-    public Ball(int r, Color color, GameEnvironment gameEnvironment) {
+    public Ball(int r, Color color) {
         Random random = new Random();
         boolean found = false;
         double x = 0, y = 0;
@@ -84,7 +81,8 @@ public class Ball implements Sprite {
         this.radius = r;
         this.color = color;
         this.velocity = new Velocity();
-        this.gameEnvironment = gameEnvironment;
+        this.gameEnvironment = null;
+        this.paddle = null;
 
         while (!found) {
             x = random.nextInt(Screen.WIDTH + 1);
@@ -191,6 +189,32 @@ public class Ball implements Sprite {
             this.center,
             this.velocity.applyToPoint(this.center)
         );
+    }
+    /**
+     * Determines whether the Ball is in the Paddle.
+     * @return true if the Ball is in the Paddle and false otherwise
+     */
+    public boolean isInPaddle() {
+        final double paddleTopY = this.paddle.getCollisionRectangle().getUpperLeft().getY();
+        final double paddleBottomY = this.paddle.getCollisionRectangle().getBottomLeft().getY();
+        final double paddleLeftX = this.paddle.getCollisionRectangle().getUpperLeft().getX();
+        final double paddleRightX = this.paddle.getCollisionRectangle().getUpperRight().getX();
+
+        return (
+            ThresholdCompare.isThresholdBasedGreaterEqual(this.center.getY(), paddleTopY)
+            && ThresholdCompare.isThresholdBasedGreaterEqual(paddleBottomY, this.center.getY())
+            && ThresholdCompare.isThresholdBasedGreaterEqual(this.center.getX(), paddleLeftX)
+            && ThresholdCompare.isThresholdBasedGreaterEqual(paddleRightX, this.center.getX())
+        );
+    }
+    /**
+     * Adds the Ball to the Game.
+     * @param g the Game to which the Ball is ought to be added
+     */
+    public void addToGame(Game g) {
+        g.addSprite(this);
+        this.gameEnvironment = g.getEnvironment();
+        this.paddle = g.getPaddle();
     }
     @Override
     public void drawOn(DrawSurface surface) {
