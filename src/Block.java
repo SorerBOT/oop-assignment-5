@@ -16,6 +16,13 @@ public class Block implements Collidable, Sprite {
         this.color = new Color(color.getRGB());
     }
     /**
+     * Constructor of the Block class.
+     * @param rectangle the Rectangle of the Block
+     */
+    public Block(Rectangle rectangle) {
+        this(rectangle, Color.BLACK);
+    }
+    /**
      * Adds the Block to the Game.
      * @param g the game to which the Block is to be added
      */
@@ -36,7 +43,11 @@ public class Block implements Collidable, Sprite {
             verticalVelocityScalar * currentVelocity.getDy()
         );
     }
-    @Override
+    /**
+     * Determines if there is a horizontal collision.
+     * @param collisionPoint the Point suspected of collision
+     * @return true if there is a collision and false otherwise
+     */
     public boolean isCollidingHorizontally(Point collisionPoint) {
         return (
             ThresholdCompare.isThresholdBasedGreaterEqual(collisionPoint.getY(), this.shape.getUpperLeft().getY())
@@ -47,7 +58,11 @@ public class Block implements Collidable, Sprite {
             )
         );
     }
-    @Override
+    /**
+     * Determines if there is a vertical collision.
+     * @param collisionPoint the Point suspected of collision
+     * @return true if there is a collision and false otherwise
+     */
     public boolean isCollidingVertically(Point collisionPoint) {
         return (
             ThresholdCompare.isThresholdBasedGreaterEqual(collisionPoint.getX(), this.shape.getUpperLeft().getX())

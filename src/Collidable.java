@@ -15,18 +15,6 @@ public interface Collidable {
      */
     Velocity hit(Point collisionPoint, Velocity currentVelocity);
     /**
-     * Determines if there is a horizontal collision.
-     * @param collisionPoint the Point suspected of collision
-     * @return true if there is a collision and false otherwise
-     */
-    boolean isCollidingHorizontally(Point collisionPoint);
-    /**
-     * Determines if there is a horizontal collision.
-     * @param collisionPoint the Point suspected of collision
-     * @return true if there is a collision and false otherwise
-     */
-    boolean isCollidingVertically(Point collisionPoint);
-    /**
      * The method clones the Collidable object, similarlyj to a copy constructor.
      * @return a copy of the Collidable object
      */

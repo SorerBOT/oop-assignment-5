@@ -136,4 +136,13 @@ public class Rectangle {
     public Line getBottomSide() {
         return new Line(this.getBottomLeft(), this.getBottomRight());
     }
+    /**
+     * Sets the x value of the upperLeft Point.
+     * Considering the fact that we derived all other information about the Rectangle
+     * Using this Point, it is sufficient to modify this Point in order to move the entire Rectangle
+     * @param newXValue
+     */
+    public void setUpperLeftXValue(double newXValue) {
+        this.upperLeft.setX(newXValue);
+    }
 }
