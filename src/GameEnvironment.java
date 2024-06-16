@@ -47,7 +47,13 @@ public class GameEnvironment {
                 }
             }
         }
-
         return closestCollisionInfo;
+    }
+    /**
+     * Getter of the collidables field.
+     * @return the collidables field
+     */
+    public ArrayList<Collidable> getCollidables() {
+        return new ArrayList<Collidable>(this.collidables);
     }
 }

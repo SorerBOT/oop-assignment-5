@@ -118,14 +118,18 @@ public class Paddle implements Sprite, Collidable {
         }
 
         region = this.getRegionOfCollision(collisionPoint);
-        // the initial angle is 60 degrees
+        // The initial angle is 60 degrees
         // for each increase in the zone's number, add 30 degrees, starting from 60
         projectionAngle = 60 - (region - 1) * 30;
         return Velocity.fromAngleAndSpeed(projectionAngle, currentSpeed);
     }
-    // The Paddle will never be used in a manner which would require its deep cloning.
+    // We would not like to clone the Paddle, and thus we return the same Paddle
     @Override
     public Collidable cloneDeep() {
-        return null;
+        return this;
+    }
+    @Override
+    public String toString() {
+        return String.valueOf(this.shape.getUpperLeft().getX()) + ", " + String.valueOf(this.shape.getUpperLeft().getY());
     }
 }

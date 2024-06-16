@@ -8,7 +8,6 @@ import biuoop.DrawSurface;
 public class Ball implements Sprite {
     private Point center;
     private Velocity velocity;
-
     private GameEnvironment gameEnvironment;
     private Paddle paddle;
     private final int radius;
@@ -168,17 +167,21 @@ public class Ball implements Sprite {
         final double proximityToCollision = 0.9;
         Line trajectory = new Line(this.center, this.velocity.applyToPoint(this.center));
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
-
+        if (this.isInPaddle()) {
+            // Teleport the ball upwards so that it is no longer inside of the Paddle.
+            this.center.setY(this.paddle.getCollisionRectangle().getUpperLeft().getY() - 1);
+            return;
+        }
         if (collisionInfo == null) {
             this.center = this.velocity.applyToPoint(this.center);
             return;
         }
 
-        Collidable collision = collisionInfo.collisionObject();
+        Collidable collidable = collisionInfo.collisionObject();
         Point point = collisionInfo.collisionPoint();
         this.center = this.velocity.moveNearCollision(this.center, point, proximityToCollision);
 
-        this.velocity = collision.hit(point, this.velocity);
+        this.velocity = collidable.hit(point, this.velocity);
     }
     /**
      * Computes the trajectory of the Ball.

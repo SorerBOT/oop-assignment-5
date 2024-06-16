@@ -39,6 +39,9 @@ public class Point {
      * @return true if the Point is equal to the other Point and false otherwise
      */
     public boolean equals(Point other) {
+        if (other == null) {
+            return false;
+        }
         return (
             ThresholdCompare.isThresholdBasedEquals(this.x, other.getX())
             && ThresholdCompare.isThresholdBasedEquals(this.y, other.getY())

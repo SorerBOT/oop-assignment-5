@@ -91,4 +91,8 @@ public class Block implements Collidable, Sprite {
     public void timePassed() {
         return;
     }
+    @Override
+    public String toString() {
+        return String.valueOf(this.shape.getUpperLeft().getX()) + ", " + String.valueOf(this.shape.getUpperLeft().getY());
+    }
 }

@@ -19,4 +19,8 @@ public interface Collidable {
      * @return a clone of the Collidable object
      */
     Collidable cloneDeep();
+    /**
+     * @return A String describing the Collidable.
+     */
+    String toString();
 }

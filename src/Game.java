@@ -17,6 +17,7 @@ public class Game {
         this.sprites = new SpriteCollection();
         this.gameEnvironment = new GameEnvironment();
         this.gui = new GUI("Gaming", Screen.WIDTH, Screen.HEIGHT);
+        this.paddle = null;
     }
     /**
      * Getter of the gameEnvironment field.
@@ -55,24 +56,25 @@ public class Game {
     }
     /**
      * This method initializes the game by generating:
+        * The Paddle
         * The Ball
         * The Blocks
-        * The Paddle
      * then adds them to the Game.
      */
-    public void initialize() {
+    public boolean initialize() {
         Ball firstBall = new Ball(new Point(500, 400), 8, Color.WHITE);
         Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
+
+        this.paddle = new Paddle(Color.YELLOW);
+        this.paddle.addToGame(this);
 
         firstBall.setVelocity(2, 3);
         secondBall.setVelocity(2, 3);
         firstBall.addToGame(this);
         secondBall.addToGame(this);
 
-        this.paddle = new Paddle(Color.YELLOW);
-        paddle.addToGame(this);
-
         this.addAllBlocks();
+        return this.test();
     }
     /**
      * Generates and adds all the blocks required for the Game.
@@ -137,5 +139,44 @@ public class Game {
                 sleeper.sleepFor(milliSecondLeftToSleep);
             }
         }
+    }
+    public boolean test() {
+        boolean addedPaddle = false;
+        boolean passedAllTests = true;
+        if (this.gui == null) {
+            System.out.println("GUI is null.");
+            passedAllTests = false;
+        }
+        if (this.gameEnvironment == null) {
+            System.out.println("GameEnvironment is null.");
+            passedAllTests = false;
+        }
+        if (this.paddle == null) {
+            System.out.println("Paddle is null.");
+            passedAllTests = false;
+        }
+        if (this.sprites == null) {
+            System.out.println("Sprites is null.");
+            passedAllTests = false;
+        }
+        if (this.gameEnvironment.getCollidables().size() != 62) {
+            System.out.println("Amount of Collidables is incorrect: " + this.gameEnvironment.getCollidables().size());
+            passedAllTests = false;
+        }
+        for (Collidable collidable : this.gameEnvironment.getCollidables()) {
+            if (collidable == null) {
+                System.out.println("Some collidable is null");
+                passedAllTests = false;
+                continue;
+            }
+            if (collidable instanceof Paddle) { // using instanceof, but only for the sake of TESTING
+                addedPaddle = true;
+            }
+        }
+        if (!addedPaddle) {
+            System.out.println("Paddle was not added.");
+            passedAllTests = false;
+        }
+        return passedAllTests;
     }
 }
