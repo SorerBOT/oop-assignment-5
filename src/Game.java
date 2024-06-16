@@ -62,13 +62,18 @@ public class Game {
      * then adds them to the Game.
      */
     public boolean initialize() {
-        Ball firstBall = new Ball(new Point(500, 400), 8, Color.WHITE);
-        Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
+        Ball firstBall = new Ball(new Point(700, 500), 6, Color.WHITE);
+        Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
+
+        Rectangle backgroundRectangle = new Rectangle(new Point(25, 25), 750, 550);
+        Block backgroundBlock = new Block(backgroundRectangle, new Color(1, 1, 122));
+        backgroundBlock.addToGame(this);
+
 
         this.paddle = new Paddle(Color.YELLOW);
         this.paddle.addToGame(this);
 
-        firstBall.setVelocity(2, 3);
+        firstBall.setVelocity(3, 2);
         secondBall.setVelocity(2, 3);
         firstBall.addToGame(this);
         secondBall.addToGame(this);
@@ -80,15 +85,15 @@ public class Game {
      * Generates and adds all the blocks required for the Game.
      */
     public void addAllBlocks() {
-        Rectangle topFrameRectangle = new Rectangle(new Point(0, -50), 800, 50);
-        Rectangle bottomFrameRectangle = new Rectangle(new Point(0, 600), 800, 50);
-        Rectangle leftFrameRectangle = new Rectangle(new Point(-50, 0), 50, 600);
-        Rectangle rightFrameRectangle = new Rectangle(new Point(800, 0), 50, 600);
+        Rectangle topFrameRectangle = new Rectangle(new Point(0, 0), 800, 25);
+        Rectangle bottomFrameRectangle = new Rectangle(new Point(0, 575), 800, 25);
+        Rectangle leftFrameRectangle = new Rectangle(new Point(0, 0), 25, 600);
+        Rectangle rightFrameRectangle = new Rectangle(new Point(775, 0), 25, 800);
 
-        Block topFrame = new Block(topFrameRectangle);
-        Block bottomFrame = new Block(bottomFrameRectangle);
-        Block leftFrame = new Block(leftFrameRectangle);
-        Block rightFrame = new Block(rightFrameRectangle);
+        Block topFrame = new Block(topFrameRectangle, Color.GRAY);
+        Block bottomFrame = new Block(bottomFrameRectangle, Color.GRAY);
+        Block leftFrame = new Block(leftFrameRectangle, Color.GRAY);
+        Block rightFrame = new Block(rightFrameRectangle, Color.GRAY);
 
         topFrame.addToGame(this);
         bottomFrame.addToGame(this);
@@ -110,7 +115,7 @@ public class Game {
      */
     public void addRowBlocks(int amountOfBlocks, double rowYValue, Color color) {
         for (int i = 0; i < amountOfBlocks; i++) {
-            Rectangle rectangle = new Rectangle(new Point(740 - 60 * i, rowYValue), 60, 30);
+            Rectangle rectangle = new Rectangle(new Point(725 - 50 * i, rowYValue), 50, 30);
             Block block = new Block(rectangle, color);
             block.addToGame(this);
         }

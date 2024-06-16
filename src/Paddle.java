@@ -5,7 +5,7 @@ import biuoop.KeyboardSensor;
  * The Paddle class.
  */
 public class Paddle implements Sprite, Collidable {
-    private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);
+    private final Rectangle shape = new Rectangle(new Point(350, 550), 125, 25);
     private final Color color;
     private KeyboardSensor keyboard;
     /**
@@ -28,10 +28,13 @@ public class Paddle implements Sprite, Collidable {
      * we are to reposition so as to make it appear to have returned from the other side
      */
     public void moveLeft() {
-        if (ThresholdCompare.isThresholdBasedGreaterEqual(8, this.shape.getUpperRight().getX())) {
-            this.shape.setUpperLeftXValue(800);
+        int movementSize = 8;
+        int widthOfBorders = 25;
+
+        if (ThresholdCompare.isThresholdBasedGreaterEqual(movementSize + widthOfBorders, this.shape.getUpperRight().getX())) {
+            this.shape.setUpperLeftXValue(800 - widthOfBorders);
         }
-        shape.setUpperLeftXValue(shape.getUpperLeft().getX() - 8);
+        shape.setUpperLeftXValue(shape.getUpperLeft().getX() - movementSize);
     }
 
     /**
@@ -40,10 +43,13 @@ public class Paddle implements Sprite, Collidable {
      * we are to reposition so as to make it appear to have returned from the other side
      */
     public void moveRight() {
-        if (ThresholdCompare.isThresholdBasedGreaterEqual(this.shape.getUpperLeft().getX(), 800 - 8)) {
-            this.shape.setUpperLeftXValue(-this.shape.getWidth());
+        int movementSize = 8;
+        int widthOfBorders = 25;
+
+        if (ThresholdCompare.isThresholdBasedGreaterEqual(this.shape.getUpperLeft().getX(), 800 - movementSize - widthOfBorders)) {
+            this.shape.setUpperLeftXValue(-this.shape.getWidth() + widthOfBorders);
         }
-        shape.setUpperLeftXValue(shape.getUpperLeft().getX() + 8);
+        shape.setUpperLeftXValue(shape.getUpperLeft().getX() + movementSize);
     }
     /**
      * Determines the region in which the collision.
