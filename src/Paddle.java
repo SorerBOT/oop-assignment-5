@@ -28,7 +28,7 @@ public class Paddle implements Sprite, Collidable {
      * we are to reposition so as to make it appear to have returned from the other side
      */
     public void moveLeft() {
-        if (this.shape.getUpperRight().getX() < 0) {
+        if (ThresholdCompare.isThresholdBasedGreaterEqual(8, this.shape.getUpperRight().getX())) {
             this.shape.setUpperLeftXValue(800);
         }
         shape.setUpperLeftXValue(shape.getUpperLeft().getX() - 8);
@@ -40,7 +40,7 @@ public class Paddle implements Sprite, Collidable {
      * we are to reposition so as to make it appear to have returned from the other side
      */
     public void moveRight() {
-        if (this.shape.getUpperLeft().getX() > 800) {
+        if (ThresholdCompare.isThresholdBasedGreaterEqual(this.shape.getUpperLeft().getX(), 800 - 8)) {
             this.shape.setUpperLeftXValue(-this.shape.getWidth());
         }
         shape.setUpperLeftXValue(shape.getUpperLeft().getX() + 8);
