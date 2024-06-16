@@ -14,4 +14,9 @@ public interface Collidable {
      * @return the new Velocity of the hitting object
      */
     Velocity hit(Point collisionPoint, Velocity currentVelocity);
+    /**
+     * Performs deep cloning of the Collidable object.
+     * @return a clone of the Collidable object
+     */
+    Collidable cloneDeep();
 }

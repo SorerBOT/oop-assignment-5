@@ -5,10 +5,9 @@ import biuoop.KeyboardSensor;
  * The Paddle class.
  */
 public class Paddle implements Sprite, Collidable {
-    private KeyboardSensor keyboard;
     private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);
     private final Color color;
-
+    private KeyboardSensor keyboard;
     /**
      * Empty constructor.
      */
@@ -123,5 +122,10 @@ public class Paddle implements Sprite, Collidable {
         // for each increase in the zone's number, add 30 degrees, starting from 60
         projectionAngle = 60 - (region - 1) * 30;
         return Velocity.fromAngleAndSpeed(projectionAngle, currentSpeed);
+    }
+    // The Paddle will never be used in a manner which would require its deep cloning.
+    @Override
+    public Collidable cloneDeep() {
+        return null;
     }
 }

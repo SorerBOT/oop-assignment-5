@@ -73,10 +73,7 @@ public class Block implements Collidable, Sprite {
             )
         );
     }
-    /**
-     * The method clones the Block object, similarly to a copy constructor.
-     * @return a copy of the Block object
-     */
+    @Override
     public Block cloneDeep() {
         return new Block(this.shape, this.color);
     }

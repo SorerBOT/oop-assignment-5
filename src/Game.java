@@ -74,7 +74,6 @@ public class Game {
 
         this.addAllBlocks();
     }
-
     /**
      * Generates and adds all the blocks required for the Game.
      */
@@ -101,7 +100,6 @@ public class Game {
         addRowBlocks(8, 200, Color.PINK);
         addRowBlocks(7, 230, Color.GREEN);
     }
-
     /**
      * Generates and adds a row of Blocks to the Game.
      * @param amountOfBlocks the number of Blocks to be generated and added
@@ -115,7 +113,6 @@ public class Game {
             block.addToGame(this);
         }
     }
-
     /**
      * Runs the Game by starting the animation loop.
      */
@@ -128,7 +125,7 @@ public class Game {
 
             DrawSurface d = gui.getDrawSurface();
             d.setColor(new Color(1, 1, 122));
-            d.fillRectangle(0, 0, 800, 600);
+            d.fillRectangle(0, 0, Screen.WIDTH, Screen.HEIGHT);
             this.sprites.drawAllOn(d);
             gui.show(d);
             this.sprites.notifyAllTimePassed();
@@ -141,6 +138,4 @@ public class Game {
             }
         }
     }
-
-
 }
