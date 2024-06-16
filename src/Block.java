@@ -86,6 +86,13 @@ public class Block implements Collidable, Sprite {
             (int) this.shape.getWidth(),
             (int) this.shape.getHeight()
         );
+        d.setColor(Color.BLACK);
+        d.drawRectangle(
+            (int) this.shape.getUpperLeft().getX(),
+            (int) this.shape.getUpperLeft().getY(),
+            (int) this.shape.getWidth(),
+            (int) this.shape.getHeight()
+        );
     }
     @Override
     public void timePassed() {
