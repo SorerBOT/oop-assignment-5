@@ -120,11 +120,11 @@ public class Game {
         }
     }
     /**
-     * Removes the provided Collidable.
+     * Removes the provided Collidable from the GameEnvironment.
      * @param c the Collidable to be removed
      */
     public void removeCollidable(Collidable c) {
-        
+        this.gameEnvironment.removeCollidable(c);
     }
     /**
      * Runs the Game by starting the animation loop.

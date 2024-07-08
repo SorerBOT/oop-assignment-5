@@ -100,8 +100,10 @@ public class Block implements Collidable, Sprite {
     }
     @Override
     public String toString() {
-        return String.valueOf(
-            this.shape.getUpperLeft().getX()) + ", " + String.valueOf(this.shape.getUpperLeft().getY()
+        return (
+            String.valueOf(this.shape.getUpperLeft().getX())
+            + ", "
+            + String.valueOf(this.shape.getUpperLeft().getY())
         );
     }
 }

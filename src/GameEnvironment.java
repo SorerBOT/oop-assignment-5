@@ -56,4 +56,11 @@ public class GameEnvironment {
     public ArrayList<Collidable> getCollidables() {
         return new ArrayList<Collidable>(this.collidables);
     }
+    /**
+     * Removes the provided Collidable from the collidables list.
+     * @param c the Collidable to be removed
+     */
+    public void removeCollidable(Collidable c) {
+        this.collidables.remove(c);
+    }
 }
