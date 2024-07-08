@@ -85,6 +85,14 @@ public class Block implements Collidable, Sprite {
             || this.color.getBlue() == ball.getColor().getBlue()
         );
     }
+    /**
+     * Removes the Block from the Game.
+     * @param g the Game from which the Block should be removed
+     */
+    public void removeFromGame(Game g) {
+        g.removeCollidable(this);
+        g.removeSprite(this);
+    }
     @Override
     public Block cloneDeep() {
         return new Block(this.shape, this.color);
