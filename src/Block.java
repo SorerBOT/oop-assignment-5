@@ -1,11 +1,15 @@
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import biuoop.DrawSurface;
 /**
  * The Block class.
  */
-public class Block implements Collidable, Sprite {
+public class Block implements Collidable, Sprite, HitNotifier {
     private final Rectangle shape;
     private final Color color;
+    private final List<HitListener> hitListeners;
     /**
      * Constructor of the Block class.
      * @param rectangle the collision Rectangle of the Block
@@ -14,6 +18,7 @@ public class Block implements Collidable, Sprite {
     public Block(Rectangle rectangle, Color color) {
         this.shape = new Rectangle(rectangle);
         this.color = new Color(color.getRGB());
+        this.hitListeners = new ArrayList<HitListener>();
     }
     /**
      * Constructor of the Block class.
@@ -21,6 +26,18 @@ public class Block implements Collidable, Sprite {
      */
     public Block(Rectangle rectangle) {
         this(rectangle, Color.BLACK);
+    }
+    /**
+     * Whenever a hit occurs, notifies all the registered HitListeners.
+     * @param hitter the Ball responsible for the hit
+     */
+    private void notifyHit(Ball hitter) {
+        // Make a copy of the hitListeners before iterating over them.
+        List<HitListener> listeners = new ArrayList<HitListener>(this.hitListeners);
+        // Notify all listeners about a hit event:
+        for (HitListener hl : listeners) {
+            hl.hitEvent(this, hitter);
+        }
     }
     /**
      * Adds the Block to the Game.
@@ -35,9 +52,14 @@ public class Block implements Collidable, Sprite {
         return new Rectangle(this.shape);
     }
     @Override
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         int horizontalVelocityScalar = this.isCollidingHorizontally(collisionPoint) ? -1 : 1;
         int verticalVelocityScalar = this.isCollidingVertically(collisionPoint) ? -1 : 1;
+
+        if (!ballColorMatch(hitter)) {
+            this.notifyHit(hitter);
+        }
+
         return new Velocity(
             horizontalVelocityScalar * currentVelocity.getDx(),
             verticalVelocityScalar * currentVelocity.getDy()
