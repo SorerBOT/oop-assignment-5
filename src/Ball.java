@@ -220,6 +220,13 @@ public class Ball implements Sprite {
         this.gameEnvironment = g.getEnvironment();
         this.paddle = g.getPaddle();
     }
+    /**
+     * Removes the Ball from the Game.
+     * @param g the Game from which the Ball should be removed
+     */
+    public void removeFromGame(Game g) {
+        g.removeSprite(this);
+    }
     @Override
     public void drawOn(DrawSurface surface) {
         surface.setColor(this.color);
