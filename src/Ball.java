@@ -181,7 +181,7 @@ public class Ball implements Sprite {
         Point point = collisionInfo.collisionPoint();
         this.center = this.velocity.moveNearCollision(this.center, point, proximityToCollision);
 
-        this.velocity = collidable.hit(point, this.velocity);
+        this.velocity = collidable.hit(this, point, this.velocity);
     }
     /**
      * Computes the trajectory of the Ball.
