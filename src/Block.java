@@ -48,6 +48,14 @@ public class Block implements Collidable, Sprite, HitNotifier {
         g.addCollidable(this);
     }
     @Override
+    public void addHitListener(HitListener hl) {
+        this.hitListeners.add(hl);
+    }
+    @Override
+    public void removeHitListener(HitListener hl) {
+        this.hitListeners.remove(hl);
+    }
+    @Override
     public Rectangle getCollisionRectangle() {
         return new Rectangle(this.shape);
     }
