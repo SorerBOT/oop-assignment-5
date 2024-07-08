@@ -12,7 +12,7 @@ public class CollisionInfo {
      */
     public CollisionInfo(Point collisionPoint, Collidable collisionObject) {
         this.collisionPoint = new Point(collisionPoint);
-        this.collisionObject = collisionObject.cloneDeep();
+        this.collisionObject = collisionObject;
     }
     /**
      * @return the Point at which the Collision occurs
@@ -24,6 +24,6 @@ public class CollisionInfo {
      * @return the Collidable object of the collision
      */
     public Collidable collisionObject() {
-        return this.collisionObject.cloneDeep();
+        return this.collisionObject;
     }
 }

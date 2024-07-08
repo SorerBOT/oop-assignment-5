@@ -119,7 +119,7 @@ public class Paddle implements Sprite, Collidable {
         return new Rectangle(this.shape);
     }
     @Override
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         int region;
         final int projectionAngle;
 
@@ -137,11 +137,6 @@ public class Paddle implements Sprite, Collidable {
         // for each increase in the zone's number, add 30 degrees, starting from 60
         projectionAngle = 60 - (region - 1) * 30;
         return Velocity.fromAngleAndSpeed(projectionAngle, currentSpeed);
-    }
-    // We would not like to clone the Paddle, and thus we return the same Paddle
-    @Override
-    public Collidable cloneDeep() {
-        return this;
     }
     @Override
     public String toString() {

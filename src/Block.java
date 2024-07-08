@@ -47,6 +47,13 @@ public class Block implements Collidable, Sprite, HitNotifier {
         g.addSprite(this);
         g.addCollidable(this);
     }
+    /**
+     * Getter of the hitListener field.
+     * @return the hitListener field
+     */
+    public List<HitListener> getHitListeners() {
+        return this.hitListeners;
+    }
     @Override
     public void addHitListener(HitListener hl) {
         this.hitListeners.add(hl);
@@ -111,8 +118,8 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public boolean ballColorMatch(Ball ball) {
         return (
             this.color.getRed() == ball.getColor().getRed()
-            || this.color.getGreen() == ball.getColor().getGreen()
-            || this.color.getBlue() == ball.getColor().getBlue()
+            && this.color.getGreen() == ball.getColor().getGreen()
+            && this.color.getBlue() == ball.getColor().getBlue()
         );
     }
     /**
@@ -122,10 +129,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public void removeFromGame(Game g) {
         g.removeCollidable(this);
         g.removeSprite(this);
-    }
-    @Override
-    public Block cloneDeep() {
-        return new Block(this.shape, this.color);
     }
     @Override
     public void drawOn(DrawSurface d) {

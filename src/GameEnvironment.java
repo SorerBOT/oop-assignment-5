@@ -17,7 +17,7 @@ public class GameEnvironment {
      * @param c The collidable to be added
      */
     public void addCollidable(Collidable c) {
-        this.collidables.add(c.cloneDeep());
+        this.collidables.add(c);
     }
 
     /**

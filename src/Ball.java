@@ -167,6 +167,7 @@ public class Ball implements Sprite {
         final double proximityToCollision = 0.9;
         Line trajectory = new Line(this.center, this.velocity.applyToPoint(this.center));
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
+
         if (this.isInPaddle()) {
             // Teleport the ball upwards so that it is no longer inside of the Paddle.
             this.center.setY(this.paddle.getCollisionRectangle().getUpperLeft().getY() - 1);

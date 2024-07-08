@@ -23,7 +23,8 @@ public class SpriteCollection {
      * Calls timePassed on all the Sprites in sprites array.
      */
     public void notifyAllTimePassed() {
-        for (Sprite s : this.sprites) {
+        ArrayList<Sprite> spritesClone = new ArrayList<Sprite>(this.sprites);
+        for (Sprite s : spritesClone) {
             s.timePassed();
         }
     }
