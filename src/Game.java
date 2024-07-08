@@ -127,6 +127,13 @@ public class Game {
         this.gameEnvironment.removeCollidable(c);
     }
     /**
+     * Removes the provided Sprite from the SpriteCollection.
+     * @param s the Sprite to be removed
+     */
+    public void removeSprite(Sprite s) {
+        this.sprites.removeSprite(s);
+    }
+    /**
      * Runs the Game by starting the animation loop.
      */
     public void run() {

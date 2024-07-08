@@ -36,4 +36,11 @@ public class SpriteCollection {
             s.drawOn(d);
         }
     }
+    /**
+     * Removes the provided Sprite from the sprites list.
+     * @param s the Sprite to be removed
+     */
+    public void removeSprite(Sprite s) {
+        this.sprites.remove(s);
+    }
 }
