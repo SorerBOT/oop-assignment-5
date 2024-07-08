@@ -120,6 +120,13 @@ public class Game {
         }
     }
     /**
+     * Removes the provided Collidable.
+     * @param c the Collidable to be removed
+     */
+    public void removeCollidable(Collidable c) {
+        
+    }
+    /**
      * Runs the Game by starting the animation loop.
      */
     public void run() {

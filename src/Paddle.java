@@ -31,7 +31,11 @@ public class Paddle implements Sprite, Collidable {
         int movementSize = 8;
         int widthOfBorders = 25;
 
-        if (ThresholdCompare.isThresholdBasedGreaterEqual(movementSize + widthOfBorders, this.shape.getUpperRight().getX())) {
+        if (
+            ThresholdCompare.isThresholdBasedGreaterEqual(
+                movementSize + widthOfBorders,
+                this.shape.getUpperRight().getX())
+            ) {
             this.shape.setUpperLeftXValue(800 - widthOfBorders);
         }
         shape.setUpperLeftXValue(shape.getUpperLeft().getX() - movementSize);
@@ -46,7 +50,12 @@ public class Paddle implements Sprite, Collidable {
         int movementSize = 8;
         int widthOfBorders = 25;
 
-        if (ThresholdCompare.isThresholdBasedGreaterEqual(this.shape.getUpperLeft().getX(), 800 - movementSize - widthOfBorders)) {
+        if (
+            ThresholdCompare.isThresholdBasedGreaterEqual(
+                this.shape.getUpperLeft().getX(),
+                800 - movementSize - widthOfBorders
+            )
+        ) {
             this.shape.setUpperLeftXValue(-this.shape.getWidth() + widthOfBorders);
         }
         shape.setUpperLeftXValue(shape.getUpperLeft().getX() + movementSize);
@@ -136,6 +145,8 @@ public class Paddle implements Sprite, Collidable {
     }
     @Override
     public String toString() {
-        return String.valueOf(this.shape.getUpperLeft().getX()) + ", " + String.valueOf(this.shape.getUpperLeft().getY());
+        return String.valueOf(
+            this.shape.getUpperLeft().getX()) + ", " + String.valueOf(this.shape.getUpperLeft().getY()
+        );
     }
 }
