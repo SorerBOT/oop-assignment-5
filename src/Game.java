@@ -123,6 +123,7 @@ public class Game {
             Block block = new Block(rectangle, color);
             block.addHitListener(this.blockRemover);
             block.addToGame(this);
+            blockCounter.increase(1);
         }
     }
     /**
@@ -147,6 +148,11 @@ public class Game {
         final int millisecondsPerFrame = 1000 / framesPerSecond;
         Sleeper sleeper = new Sleeper();
         while (true) {
+            System.out.println(this.blockCounter.getValue());
+            if (this.blockCounter.getValue() == 0) {
+                gui.close();
+                return;
+            }
             long startTime = System.currentTimeMillis(); //Timing
 
             DrawSurface d = gui.getDrawSurface();
