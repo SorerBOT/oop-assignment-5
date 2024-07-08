@@ -73,6 +73,18 @@ public class Block implements Collidable, Sprite {
             )
         );
     }
+    /**
+     * Compares the color of the Block with the color of the Ball.
+     * @param ball the Ball to be compared with
+     * @return true if the colors are equals and false otherwise
+     */
+    public boolean ballColorMatch(Ball ball) {
+        return (
+            this.color.getRed() == ball.getColor().getRed()
+            || this.color.getGreen() == ball.getColor().getGreen()
+            || this.color.getBlue() == ball.getColor().getBlue()
+        );
+    }
     @Override
     public Block cloneDeep() {
         return new Block(this.shape, this.color);
