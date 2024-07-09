@@ -58,6 +58,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public void addHitListener(HitListener hl) {
         this.hitListeners.add(hl);
     }
+    /**
+     * Adds multiple HitListener.
+     * @param hitListeners an array of HitListeners
+     */
     public void addHitListener(HitListener[] hitListeners) {
         for (HitListener hitListener : hitListeners) {
             this.addHitListener(hitListener);

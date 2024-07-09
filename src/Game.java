@@ -97,7 +97,7 @@ public class Game {
     public void addAllBalls() {
         Ball firstBall = new Ball(new Point(750, 500), 6, Color.WHITE);
         Ball secondBall = new Ball(new Point(650, 400), 6, Color.WHITE);
-        Ball thirdBall = new Ball(new Point(550, 300), 6, Color.WHITE);
+        Ball thirdBall = new Ball(new Point(550, 350), 6, Color.WHITE);
 
         firstBall.setVelocity(3, 2);
         firstBall.addToGame(this);
@@ -126,12 +126,11 @@ public class Game {
         leftFrame.addToGame(this);
         rightFrame.addToGame(this);
 
-        addRowBlocks(12, 80, Color.GRAY);
-        addRowBlocks(11, 110, Color.RED);
-        addRowBlocks(10, 140, Color.YELLOW);
-        addRowBlocks(9, 170, Color.BLUE);
-        addRowBlocks(8, 200, Color.PINK);
-        addRowBlocks(7, 230, Color.GREEN);
+        addRowBlocks(10, 150, Color.GRAY);
+        addRowBlocks(9, 180, Color.RED);
+        addRowBlocks(8, 210, Color.YELLOW);
+        addRowBlocks(7, 240, Color.BLUE);
+        addRowBlocks(6, 270, Color.WHITE);
     }
     /**
      * Generates and adds a row of Blocks to the Game.
@@ -143,7 +142,7 @@ public class Game {
         for (int i = 0; i < amountOfBlocks; i++) {
             Rectangle rectangle = new Rectangle(new Point(725 - 50 * i, rowYValue), 50, 30);
             Block block = new Block(rectangle, color);
-            block.addHitListener(new HitListener[]{this.blockRemover, this.scoreTrackingListener});
+            block.addHitListener(new HitListener[]{this.scoreTrackingListener, this.blockRemover});
             block.addToGame(this);
             blockCounter.increase(1);
         }

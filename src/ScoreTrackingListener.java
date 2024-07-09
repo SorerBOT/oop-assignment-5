@@ -14,6 +14,9 @@ public class ScoreTrackingListener implements HitListener {
 
     @Override
     public void hitEvent(Block beingHit, Ball hitter) {
+        if (beingHit.ballColorMatch(hitter)) {
+            return;
+        }
         this.currentScore.increase(5);
     }
 }
