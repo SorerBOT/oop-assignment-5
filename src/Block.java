@@ -128,6 +128,13 @@ public class Block implements Collidable, Sprite, HitNotifier {
         g.removeCollidable(this);
         g.removeSprite(this);
     }
+    /**
+     * Getter of the color field.
+     * @return the Color of the Block
+     */
+    public Color getColor() {
+        return new Color(this.color.getRGB());
+    }
     @Override
     public void drawOn(DrawSurface d) {
         d.setColor(this.color);

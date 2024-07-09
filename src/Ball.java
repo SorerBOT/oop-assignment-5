@@ -11,7 +11,7 @@ public class Ball implements Sprite {
     private GameEnvironment gameEnvironment;
     private Paddle paddle;
     private final int radius;
-    private final Color color;
+    private Color color;
 
     /**
      * Constructor of the Ball class.
@@ -226,6 +226,13 @@ public class Ball implements Sprite {
      */
     public void removeFromGame(Game g) {
         g.removeSprite(this);
+    }
+    /**
+     * Setter of the color field.
+     * @param color the new Color
+     */
+    public void setColor(Color color) {
+        this.color = new Color(color.getRGB());
     }
     @Override
     public void drawOn(DrawSurface surface) {
