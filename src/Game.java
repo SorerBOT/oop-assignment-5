@@ -78,13 +78,13 @@ public class Game {
      */
     public void initialize() {
         Rectangle backgroundRectangle = new Rectangle(new Point(0, 0), 800, 600);
-        Block backgroundBlock = new Block(backgroundRectangle, new Color(1, 1, 122));
+        Block backgroundBlock = new Block(backgroundRectangle, new Color(48, 132, 20));
         ScoreIndicator scoreIndicator = new ScoreIndicator(this.scoreCounter);
 
         backgroundBlock.addHitListener(this.ballRemover);
         backgroundBlock.addToGame(this);
 
-        this.paddle = new Paddle(Color.YELLOW);
+        this.paddle = new Paddle(new Color(255, 200, 0, 255));
         this.paddle.addToGame(this);
 
         this.addAllBalls();
@@ -114,7 +114,7 @@ public class Game {
      * Generates and adds all the blocks required for the Game.
      */
     public void addAllBlocks() {
-        Rectangle topFrameRectangle = new Rectangle(new Point(0, 0), 800, 25);
+        Rectangle topFrameRectangle = new Rectangle(new Point(0, 20), 800, 25);
         Rectangle leftFrameRectangle = new Rectangle(new Point(0, 0), 25, 600);
         Rectangle rightFrameRectangle = new Rectangle(new Point(775, 0), 25, 800);
 
