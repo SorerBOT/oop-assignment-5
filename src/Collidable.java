@@ -16,8 +16,8 @@ public interface Collidable {
      */
     Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);
     /**
-     * Performs deep cloning of the Collidable object.
-     * @return a clone of the Collidable object
+     * Generates a String corresponding to the Collidable.
+     * @return the String generated
      */
     String toString();
 }

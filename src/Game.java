@@ -74,8 +74,10 @@ public class Game {
         Ball firstBall = new Ball(new Point(700, 500), 6, Color.WHITE);
         Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
 
-        Rectangle backgroundRectangle = new Rectangle(new Point(25, 25), 750, 550);
+        Rectangle backgroundRectangle = new Rectangle(new Point(0, 0), 800, 600);
         Block backgroundBlock = new Block(backgroundRectangle, new Color(1, 1, 122));
+
+        backgroundBlock.addHitListener(this.ballRemover);
         backgroundBlock.addToGame(this);
 
 
@@ -94,19 +96,14 @@ public class Game {
      */
     public void addAllBlocks() {
         Rectangle topFrameRectangle = new Rectangle(new Point(0, 0), 800, 25);
-        Rectangle bottomFrameRectangle = new Rectangle(new Point(0, 575), 800, 25);
         Rectangle leftFrameRectangle = new Rectangle(new Point(0, 0), 25, 600);
         Rectangle rightFrameRectangle = new Rectangle(new Point(775, 0), 25, 800);
 
         Block topFrame = new Block(topFrameRectangle, Color.GRAY);
-        Block bottomFrame = new Block(bottomFrameRectangle, Color.GRAY);
         Block leftFrame = new Block(leftFrameRectangle, Color.GRAY);
         Block rightFrame = new Block(rightFrameRectangle, Color.GRAY);
 
-        bottomFrame.addHitListener(this.ballRemover);
-
         topFrame.addToGame(this);
-        bottomFrame.addToGame(this);
         leftFrame.addToGame(this);
         rightFrame.addToGame(this);
 
