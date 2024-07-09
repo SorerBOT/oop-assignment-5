@@ -6,9 +6,16 @@ public class Counter {
 
     /**
      * Constructor of the Counter class.
+     * @param count the counter
+     */
+    public Counter(int count) {
+        this.count = count;
+    }
+    /**
+     * Constructor of the Counter class.
      */
     public Counter() {
-        this.count = 0;
+        this(0);
     }
     /**
      * Adds a number to the current count.

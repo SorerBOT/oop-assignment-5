@@ -11,7 +11,9 @@ public class Game {
     private final GUI gui;
     private Paddle paddle;
     private Counter blockCounter;
-    private BlockRemover blockRemover;
+    private Counter ballCounter;
+    private final BlockRemover blockRemover;
+    private final BallRemover ballRemover;
 
     /**
      * Empty constructor of the Game class.
@@ -22,7 +24,9 @@ public class Game {
         this.gui = new GUI("Gaming", Screen.WIDTH, Screen.HEIGHT);
         this.paddle = null;
         this.blockCounter = new Counter();
+        this.ballCounter = new Counter();
         this.blockRemover = new BlockRemover(this, this.blockCounter);
+        this.ballRemover = new BallRemover(this, this.ballCounter);
     }
     /**
      * Getter of the gameEnvironment field.
@@ -99,6 +103,8 @@ public class Game {
         Block leftFrame = new Block(leftFrameRectangle, Color.GRAY);
         Block rightFrame = new Block(rightFrameRectangle, Color.GRAY);
 
+        bottomFrame.addHitListener(this.ballRemover);
+
         topFrame.addToGame(this);
         bottomFrame.addToGame(this);
         leftFrame.addToGame(this);
@@ -148,7 +154,6 @@ public class Game {
         final int millisecondsPerFrame = 1000 / framesPerSecond;
         Sleeper sleeper = new Sleeper();
         while (true) {
-            System.out.println(this.blockCounter.getValue());
             if (this.blockCounter.getValue() == 0) {
                 gui.close();
                 return;
