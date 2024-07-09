@@ -14,12 +14,12 @@ public class BlockRemover implements HitListener {
         this.game = game;
         this.remainingBlocks = remainingBlocks;
     }
-    /**
-     * Removes the Block from the Game and then decreases the Counter.
-     * @param beingHit the Block which was hit
-     * @param hitter the Ball responsible for the hit
-     */
+
+    @Override
     public void hitEvent(Block beingHit, Ball hitter) {
+        if (beingHit.ballColorMatch(hitter)) {
+            return;
+        }
         beingHit.removeHitListener(this);
         beingHit.removeFromGame(this.game);
         remainingBlocks.decrease(1);
