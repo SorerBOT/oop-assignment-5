@@ -71,25 +71,36 @@ public class Game {
      * then adds them to the Game.
      */
     public void initialize() {
-        Ball firstBall = new Ball(new Point(700, 500), 6, Color.WHITE);
-        Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
-
         Rectangle backgroundRectangle = new Rectangle(new Point(0, 0), 800, 600);
         Block backgroundBlock = new Block(backgroundRectangle, new Color(1, 1, 122));
 
         backgroundBlock.addHitListener(this.ballRemover);
         backgroundBlock.addToGame(this);
 
-
         this.paddle = new Paddle(Color.YELLOW);
         this.paddle.addToGame(this);
 
+        this.addAllBalls();
+        this.addAllBlocks();
+    }
+    /**
+     * Adds the Balls the to the Game.
+     */
+    public void addAllBalls() {
+        Ball firstBall = new Ball(new Point(750, 500), 6, Color.WHITE);
+        Ball secondBall = new Ball(new Point(650, 400), 6, Color.WHITE);
+        Ball thirdBall = new Ball(new Point(550, 300), 6, Color.WHITE);
+
         firstBall.setVelocity(3, 2);
-        secondBall.setVelocity(2, 3);
         firstBall.addToGame(this);
+
+        secondBall.setVelocity(2, 3);
         secondBall.addToGame(this);
 
-        this.addAllBlocks();
+        thirdBall.setVelocity(1, 3);
+        thirdBall.addToGame(this);
+
+        this.ballCounter.increase(3);
     }
     /**
      * Generates and adds all the blocks required for the Game.
@@ -149,12 +160,19 @@ public class Game {
     public void run() {
         final int framesPerSecond = 60;
         final int millisecondsPerFrame = 1000 / framesPerSecond;
-        Sleeper sleeper = new Sleeper();
+        final Sleeper sleeper = new Sleeper();
+        boolean isFinishedBlocks;
+        boolean isFinishedBalls;
+
         while (true) {
-            if (this.blockCounter.getValue() == 0) {
+            isFinishedBlocks = this.blockCounter.getValue() == 0;
+            isFinishedBalls = this.ballCounter.getValue() == 0;
+
+            if (isFinishedBlocks || isFinishedBalls) {
                 gui.close();
                 return;
             }
+
             long startTime = System.currentTimeMillis(); //Timing
 
             DrawSurface d = gui.getDrawSurface();
