@@ -79,6 +79,7 @@ public class Game {
     public void initialize() {
         Rectangle backgroundRectangle = new Rectangle(new Point(0, 0), 800, 600);
         Block backgroundBlock = new Block(backgroundRectangle, new Color(1, 1, 122));
+        ScoreIndicator scoreIndicator = new ScoreIndicator(this.scoreCounter);
 
         backgroundBlock.addHitListener(this.ballRemover);
         backgroundBlock.addToGame(this);
@@ -88,6 +89,7 @@ public class Game {
 
         this.addAllBalls();
         this.addAllBlocks();
+        this.addSprite(scoreIndicator);
     }
     /**
      * Adds the Balls the to the Game.
