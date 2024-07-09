@@ -71,9 +71,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
         int horizontalVelocityScalar = this.isCollidingHorizontally(collisionPoint) ? -1 : 1;
         int verticalVelocityScalar = this.isCollidingVertically(collisionPoint) ? -1 : 1;
 
-        if (!ballColorMatch(hitter)) {
-            this.notifyHit(hitter);
-        }
+        this.notifyHit(hitter);
 
         return new Velocity(
             horizontalVelocityScalar * currentVelocity.getDx(),
