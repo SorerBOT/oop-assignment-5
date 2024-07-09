@@ -10,10 +10,12 @@ public class Game {
     private final GameEnvironment gameEnvironment;
     private final GUI gui;
     private Paddle paddle;
-    private Counter blockCounter;
-    private Counter ballCounter;
+    private final Counter blockCounter;
+    private final Counter ballCounter;
+    private final Counter scoreCounter;
     private final BlockRemover blockRemover;
     private final BallRemover ballRemover;
+    private final ScoreTrackingListener scoreTrackingListener;
 
     /**
      * Empty constructor of the Game class.
@@ -23,10 +25,14 @@ public class Game {
         this.gameEnvironment = new GameEnvironment();
         this.gui = new GUI("Gaming", Screen.WIDTH, Screen.HEIGHT);
         this.paddle = null;
+
         this.blockCounter = new Counter();
         this.ballCounter = new Counter();
+        this.scoreCounter = new Counter();
+
         this.blockRemover = new BlockRemover(this, this.blockCounter);
         this.ballRemover = new BallRemover(this, this.ballCounter);
+        this.scoreTrackingListener = new ScoreTrackingListener(this.scoreCounter);
     }
     /**
      * Getter of the gameEnvironment field.
@@ -135,7 +141,7 @@ public class Game {
         for (int i = 0; i < amountOfBlocks; i++) {
             Rectangle rectangle = new Rectangle(new Point(725 - 50 * i, rowYValue), 50, 30);
             Block block = new Block(rectangle, color);
-            block.addHitListener(this.blockRemover);
+            block.addHitListener(new HitListener[]{this.blockRemover, this.scoreTrackingListener});
             block.addToGame(this);
             blockCounter.increase(1);
         }
