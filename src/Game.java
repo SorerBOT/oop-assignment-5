@@ -173,7 +173,9 @@ public class Game {
         while (true) {
             isFinishedBlocks = this.blockCounter.getValue() == 0;
             isFinishedBalls = this.ballCounter.getValue() == 0;
-
+            if (isFinishedBlocks) {
+                this.scoreCounter.increase(100);
+            }
             if (isFinishedBlocks || isFinishedBalls) {
                 gui.close();
                 return;
